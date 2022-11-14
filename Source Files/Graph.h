@@ -1,7 +1,6 @@
 #pragma once
 #include <map>
 #include <fstream>
-#include <ifstrean>
 #include "Edge.h"
 #include <vector>
 
@@ -19,6 +18,6 @@ class Graph {
 
     private:
         //COMPLETE, IGNORE Decide how to implement graph, adjacency matrix, etc.
-        std::map<Vertex, std::map<Vertex, Edge>>; //adajacency list
+        std::map<Vertex, std::map<Vertex, Edge>> adjacent_; //adajacency list
 
 };

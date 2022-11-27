@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
     
     while(getline(fin, line)){               //Reading CSV data into Map
         //std::cout << line << std::endl;    //Raw data output
-        std::string AirportID, Name, City, Country, IATA, ICAO, Lat, Long; //Data attributes
+        std::string AirportID, Name, City, Country, IATA, ICAO; //Data attributes
         std::stringstream inputString(line);
         getline(inputString, AirportID, ',');
         getline(inputString, Name, ',');
@@ -39,8 +39,6 @@ int main(int argc, char** argv) {
         if(ICAO == "\\N"){      //Removing NULL values
             ICAO = "";
         }
-        getline(inputString, Lat, ',');
-        getline(inputString, Long, ',');
 
         if(Country == "\"United States\""){     //Limiting data to US airports  
             data.insert(std::make_pair(AirportID, std::make_pair(Name, std::make_pair(City, 

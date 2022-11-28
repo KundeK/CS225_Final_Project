@@ -20,12 +20,12 @@ int main(int argc, char** argv) {
         return -1;
     }
     std::multimap<std::string, std::pair<std::string, std::pair<std::string, std::pair<std::string,
-                  std::pair<std::string, std::string>>>>> data; //Map data structure
+                  std::pair<std::string, std::pair<std::string, std::pair<std::string, std::string>>>>>>> data; //Map data structure
     std::string line = "";
     
     while(getline(fin, line)){               //Reading CSV data into Map
         //std::cout << line << std::endl;    //Raw data output
-        std::string AirportID, Name, City, Country, IATA, ICAO; //Data attributes
+        std::string AirportID, Name, City, Country, IATA, ICAO, Lat, Long;      //Data attributes
         std::stringstream inputString(line);
         getline(inputString, AirportID, ',');
         getline(inputString, Name, ',');
@@ -39,10 +39,12 @@ int main(int argc, char** argv) {
         if(ICAO == "\\N"){      //Removing NULL values
             ICAO = "";
         }
+        getline(inputString, Lat, ',');
+        getline(inputString, Long, ',');
 
         if(Country == "\"United States\""){     //Limiting data to US airports  
-            data.insert(std::make_pair(AirportID, std::make_pair(Name, std::make_pair(City, 
-                        std::make_pair(Country, std::make_pair(IATA, ICAO))))));
+            data.insert(std::make_pair(AirportID, std::make_pair(Name, std::make_pair(City, std::make_pair(Country, 
+                        std::make_pair(IATA, std::make_pair(ICAO, std::make_pair(Lat, Long))))))));
         }
     }
     fin.close();
@@ -54,7 +56,9 @@ int main(int argc, char** argv) {
                      it->second.second.first << ", " << 
                      it->second.second.second.first << ", " <<
                      it->second.second.second.second.first << ", " << 
-                     it->second.second.second.second.second << std::endl; 
+                     it->second.second.second.second.second.first << ", " <<
+                     it->second.second.second.second.second.second.first << ", " << 
+                     it->second.second.second.second.second.second.second << std::endl; 
     }
 
 
@@ -107,4 +111,13 @@ int main(int argc, char** argv) {
     }
 
     return 0;
+}
+
+
+//Helper function for calculating relative distance between two airports.
+//Will require longitude and latitude coordinates of two airports. 
+int relative_Distance(){ 
+    
+    return 0;
+    
 }

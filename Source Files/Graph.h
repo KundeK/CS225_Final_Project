@@ -4,6 +4,7 @@
 #include <fstream>
 #include "Edge.h"
 #include <vector>
+using namespace std;
 
 class Graph {
 
@@ -72,6 +73,6 @@ class Graph {
     std::vector<Edge> Dijkstras(); //Dijkstra's Algorithm - Shaarav, Aadarsh Returns a vector of edges representing shortest path
 
     private:
-        std::unordered_map<Vertex, std::unordered_map<Vertex, Edge>> adjacency_list; //adajacency list
+        mutable std::unordered_map<Vertex, std::unordered_map<Vertex, Edge>> adjacency_list; //adajacency list
 
 };

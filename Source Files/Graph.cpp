@@ -1,5 +1,10 @@
 #include "Graph.h"
+using namespace std;
 
+
+Graph::Graph() {
+    
+}
 
 std::vector<Vertex> Graph::getAdjacent(Vertex source) const {
     auto lookup = adjacency_list.find(source);
@@ -52,7 +57,7 @@ std::string Graph::getEdgeLabel(Vertex source, Vertex destination) const {
         throw std::invalid_argument("No Edge Exists");
     }
         
-    return adjacency_list[source][destination].getLabel();
+    return adjacency_list[source][destination].getAirline();
 }
 
 int Graph::getEdgeWeight(Vertex source, Vertex destination) const {
@@ -73,7 +78,7 @@ bool Graph::insertEdge(Vertex source, Vertex destination) {
         //edge already exists
         return false;
     }
-    
+
     if (adjacency_list.find(source)==adjacency_list.end()) {
 
         adjacency_list[source] = unordered_map<Vertex, Edge>();

@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 #include <cmath>
+#include "/workspaces/CS225_2/Final Project/CS225_Final_Project/src/Graph.h"
 
 int main(int argc, char** argv) {
     //DO DATA PROCESSING HERE, FEED IN PATH TO CSV FILE THROUGH TERMINAL
@@ -49,14 +50,14 @@ int main(int argc, char** argv) {
     fin.close();
 
     //For-loop for map data-verification, should be commented out unless testing
-    for(auto it = data.cbegin(); it != data.cend(); it++){
-        std::cout << it->first << ", " << 
-                     it->second.first << ", " << 
-                     it->second.second.first << ", " << 
-                     it->second.second.second.first << ", " <<
-                     it->second.second.second.second.first << ", " << 
-                     it->second.second.second.second.second << std::endl; 
-    }
+    // for(auto it = data.cbegin(); it != data.cend(); it++){
+    //     std::cout << it->first << ", " << 
+    //                  it->second.first << ", " << 
+    //                  it->second.second.first << ", " << 
+    //                  it->second.second.second.first << ", " <<
+    //                  it->second.second.second.second.first << ", " << 
+    //                  it->second.second.second.second.second << std::endl; 
+    // }
 
 
     //routes.dat
@@ -98,15 +99,16 @@ int main(int argc, char** argv) {
     fin2.close();
 
     //For-loop for map data-verification, should be commented out unless testing
-    for(auto it = data2.cbegin(); it != data2.cend(); it++){
-        std::cout << it->first << ", " << 
-                     it->second.first << ", " << 
-                     it->second.second.first << ", " << 
-                     it->second.second.second.first << ", " <<
-                     it->second.second.second.second.first << ", " << 
-                     it->second.second.second.second.second << std::endl; 
-    }
+    // for(auto it = data2.cbegin(); it != data2.cend(); it++){
+    //     std::cout << it->first << ", " << 
+    //                  it->second.first << ", " << 
+    //                  it->second.second.first << ", " << 
+    //                  it->second.second.second.first << ", " <<
+    //                  it->second.second.second.second.first << ", " << 
+    //                  it->second.second.second.second.second << std::endl; 
+    // }
 
+    Graph g(data, data2);
     return 0;
 
 

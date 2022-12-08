@@ -17,6 +17,8 @@ class Edge {
         Vertex getEnd();
         std::string getAirline();
         unsigned long getDistance();
+        void setDistance(long double dist);
+        void setLabel(std::string a);
 
         //Overloaded operators
         // bool operator<(const Edge& other) const {

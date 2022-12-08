@@ -1,6 +1,5 @@
 #pragma once
 #include <map>
-#include <unordered_map>
 #include <fstream>
 #include "Edge.h"
 #include <vector>
@@ -14,11 +13,15 @@ class Graph {
 
     Graph(); //Default Constructor
 
+    Graph(std::multimap<std::string, std::pair<std::string, std::pair<std::string, std::pair<std::string,
+                  std::pair<std::string, std::pair<std::string, std::pair<std::string, std::string>>>>>>> airport_data, std::multimap<std::string, std::pair<std::string, std::pair<std::string, std::pair<std::string,
+                  std::pair<std::string, std::string>>>>> route_data);
+
     
     /**
      * Gets all adjacent vertices to the parameter vertex.
      */
-    std::vector<Vertex> getAdjacent(Vertex source) const;
+    vector<Vertex> getAdjacent(Vertex source) const;
 
     /**
      * Returns one random vertex in the graph. 
@@ -68,11 +71,11 @@ class Graph {
 
 
     //Below space-time complexity may get large, consider returning just the highest rank airport/5 highest ranked airports - Aadarsh
-    std::vector<size_t> PageRank(); //PageRank Algoirhtm - Krushank, Aadarsh Returns a vector arranging vertices by rank,
+    std::vector<Vertex> PageRank(); //PageRank Algoirhtm - Krushank, Aadarsh Returns a vector arranging vertices by rank,
     
     std::vector<Edge> Dijkstras(); //Dijkstra's Algorithm - Shaarav, Aadarsh Returns a vector of edges representing shortest path
 
     private:
-        mutable std::unordered_map<Vertex, std::unordered_map<Vertex, Edge>> adjacency_list; //adajacency list
+        std::map<Vertex, std::map<Vertex, Edge>> adjacency_list; //adajacency list
 
 };

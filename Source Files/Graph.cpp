@@ -1,89 +1,62 @@
 #include "Graph.h"
 
-
-std::vector<Vertex> Graph::getAdjacent(Vertex source) const {
-    auto lookup = adjacency_list.find(source);
-
-    if (lookup == adjacency_list.end()) {
-        return vector<Vertex>();
-    } else {
-        std::vector<Vertex> vertex_list;
-        std::unordered_map <Vertex, Edge> & map = adjacency_list[source];
-        for (auto it = map.begin(); it != map.end(); it++) {
-            vertex_list.push_back(it->first);
-        }
-        return vertex_list;
-    }
+Graph::Graph() {
+    //Default
 }
 
-Vertex Graph::getStartingVertex() const {
+Graph::Graph(std::multimap<std::string, std::pair<std::string, std::pair<std::string, std::pair<std::string,
+                  std::pair<std::string, std::pair<std::string, std::pair<std::string, std::string>>>>>>> airport_data, std::multimap<std::string, std::pair<std::string, std::pair<std::string, std::pair<std::string,
+                  std::pair<std::string, std::string>>>>> route_data) {
+
+                    //Traverse through Map, Create a Vertex for Each and Add to Map
+                    std::map<std::string, std::pair<double, double>> id_to_latlong;
+                    std::map<std::string, Vertex> id_to_vertex;
+
+                    for(auto it = airport_data.cbegin(); it != airport_data.cend(); it++){
+                        Vertex port(it->first, it->second.first, it->second.second.first, it->second.second.second.first, it->second.second.second.second.first, it->second.second.second.second.second.first, it->second.second.second.second.second.second.first, it->second.second.second.second.second.second.second);
+                        //Add these to adjacency list
+                        id_to_vertex.insert({it->first, port});
+                        //GONNA NEED A MAP OF AIRPORT ID, to LAT LONG
+                        //GONNA NEED MAP OF AIRPORT ID TO VERTEX
+                        id_to_latlong.insert({it->first, std::make_pair(port.getLat(), port.getLong())});
+                    }
+
+                    //Go through routes data
+                    for(auto it = route_data.cbegin(); it != route_data.cend(); it++) {
+                        //Add an edge between source airport and dest airport
+                        Edge e(id_to_vertex[it->second.second.second.first], id_to_vertex[it->second.second.second.second.second]); //Error could be id doesn't exist in vertices
+
+                        //Check if start vertex exists in map
+                        //If it does exist, add to its map
+                        if (adjacency_list.find(id_to_vertex[it->second.second.second.first]) == adjacency_list.end()) {
+                            std::map<Vertex, Edge> adj;
+                            adj.insert({e.getEnd(), e});
+                            adjacency_list.insert({e.getStart(), adj});
+                        } else { //If it doesn't, create a new insertion in existing map
+                            adjacency_list[e.getStart()].insert({e.getEnd(), e});
+                        }
+
+                    }
+
+
+
+}
+
+
+Vertex Graph::getStartingVertex() const { //COMPILES
     return adjacency_list.begin()->first;
-}
-    
-
-Edge Graph::getEdge(Vertex source, Vertex destination) const {
-    if (edgeExists(source, destination) == false) {
-        return Edge();
-    }
-    Edge ret = adjacency_list[source][destination];
-    return ret;
-}
-
-
-bool Graph::vertexExists (Vertex v) const {
-    if (adjacency_list.find(v) == adjacency_list.end()) {
-        return false;
-    }
-    return true;
-}
-
-bool Graph::edgeExists(Vertex source, Vertex destination) const {
-    if (vertexExists(source) == false) {
-        return false;
-    }
-    if (adjacency_list[source].find(destination)== adjacency_list[source].end()) {
-        return false;
-    }
-    return true;
-}
-
-std::string Graph::getEdgeLabel(Vertex source, Vertex destination) const {
-    if (edgeExists(source, destination) == false) {
-        throw std::invalid_argument("No Edge Exists");
-    }
-        
-    return adjacency_list[source][destination].getLabel();
-}
-
-int Graph::getEdgeWeight(Vertex source, Vertex destination) const {
-    if (edgeExists(source, destination) == false) {
-        return -1;
-    }
-    return adjacency_list[source][destination].getDistance();
 }
 
 void Graph::insertVertex(Vertex v) {
-    adjacency_list[v] = unordered_map<Vertex, Edge>();
+    
 }
 
 bool Graph::insertEdge(Vertex source, Vertex destination) {
-    if (adjacency_list.find(source)!= adjacency_list.end() 
-    && adjacency_list[source].find(destination)!= adjacency_list[source].end()) 
-    {
-        //edge already exists
-        return false;
-    }
-    
-    if (adjacency_list.find(source)==adjacency_list.end()) {
-
-        adjacency_list[source] = unordered_map<Vertex, Edge>();
-    }
-    //vertex exists
-    adjacency_list[source][destination] = Edge(source, destination);
-
     return true;
 }
-    
+
+
+/* Commented for Compiling Purposes - Aadarsh
 std::vector<size_t> Graph::PageRank() {
 
     // PageRank() -> uses graph and needs parameter n, which specifies number of iterations
@@ -137,3 +110,4 @@ std::vector<size_t> Graph::PageRank() {
     // return rank; return map of vertices with rank
     
 }
+*/

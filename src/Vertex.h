@@ -5,12 +5,19 @@ class Vertex {
 
     public:
         Vertex(); //Default constructor
-        Vertex(std::string name, std::string id, std::string city, std::string country, std::string iata, std::string icao, double lati, double longi); 
+        Vertex(std::string name, std::string id, std::string city, std::string country, std::string iata, std::string icao, std::string lati, std::string longi); 
 
         //Overloaded operators
 
-        bool operator!=(Vertex& other) const {
+        bool operator!=(const Vertex& other) const {
             if (this->airport_id_ != other.airport_id_) {
+                return true;
+            }
+            return false;
+        }
+
+        bool operator<(const Vertex& other) const {
+            if (this->airport_name_ < other.airport_name_) {
                 return true;
             }
             return false;

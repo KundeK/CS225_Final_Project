@@ -69,6 +69,9 @@ class Graph {
     bool insertEdge(Vertex source, Vertex destination);
 
 
+    unsigned int getDegree(Vertex node);
+
+
 
     //Below space-time complexity may get large, consider returning just the highest rank airport/5 highest ranked airports - Aadarsh
     std::vector<Vertex> PageRank(); //PageRank Algoirhtm - Krushank, Aadarsh Returns a vector arranging vertices by rank,

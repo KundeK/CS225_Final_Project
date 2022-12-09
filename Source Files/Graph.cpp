@@ -4,6 +4,7 @@ Graph::Graph() {
     //Default
 }
 
+//Runtime depends on size of data: might be horrendous
 Graph::Graph(std::multimap<std::string, std::pair<std::string, std::pair<std::string, std::pair<std::string,
                   std::pair<std::string, std::pair<std::string, std::pair<std::string, std::string>>>>>>> airport_data, std::multimap<std::string, std::pair<std::string, std::pair<std::string, std::pair<std::string,
                   std::pair<std::string, std::string>>>>> route_data) {
@@ -24,7 +25,17 @@ Graph::Graph(std::multimap<std::string, std::pair<std::string, std::pair<std::st
                     //Go through routes data
                     for(auto it = route_data.cbegin(); it != route_data.cend(); it++) {
                         //Add an edge between source airport and dest airport
-                        Edge e(id_to_vertex[it->second.second.second.first], id_to_vertex[it->second.second.second.second.second]); //Error could be id doesn't exist in vertices
+                        Vertex start = id_to_vertex[it->second.second.second.first];
+                        Vertex end = id_to_vertex[it->second.second.second.second.second];
+                        Edge e(start, end); //Error could be id doesn't exist in vertices
+                        
+                        double dist = start.getEdgeWeight(start.getLat(), start.getLong(), end.getLat(), end.getLong());
+
+                        //SET EDGE WEIGHT
+                        e.setDistance(dist);
+                        
+                        //SET AIRLINE LABEL HERE 
+                        e.setLabel(it->first);
 
                         //Check if start vertex exists in map
                         //If it does exist, add to its map
@@ -48,11 +59,16 @@ Vertex Graph::getStartingVertex() const { //COMPILES
 }
 
 void Graph::insertVertex(Vertex v) {
-    
+    //Not needed anymore
 }
 
 bool Graph::insertEdge(Vertex source, Vertex destination) {
     return true;
+}
+
+
+unsigned int Graph::getDegree(Vertex node) { //For Krushank's PageRank
+    return adjacency_list[node].size();
 }
 
 

@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <cmath>
 
 class Vertex {
 
@@ -25,6 +26,9 @@ class Vertex {
 
         double getLat();
         double getLong();
+
+        long double toRadians(long double degree);
+        long double getEdgeWeight(long double lat1, long double long1, long double lat2, long double long2);
 
     private:
         std::string airport_name_;

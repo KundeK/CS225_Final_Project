@@ -33,3 +33,11 @@ std::string Edge::getAirline() {
 unsigned long Edge::getDistance() {
     return distance_;
 }
+
+void Edge::setDistance(long double dist) {
+    distance_ = dist;
+}
+
+void Edge::setLabel(std::string a) {
+    airline_ = a;
+}

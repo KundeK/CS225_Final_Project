@@ -1,8 +1,12 @@
 #pragma once
 #include <map>
+#include <iostream>
 #include <fstream>
 #include "Edge.h"
 #include <vector>
+#include <queue>
+#include <utility>
+#include <set>
 using namespace std;
 
 class Graph {
@@ -53,10 +57,10 @@ class Graph {
      */
     std::string getEdgeLabel(Vertex source, Vertex destination) const;
 
-    /**
-     * Gets the weight of the edge between two vertices.
-     */
-    int getEdgeWeight(Vertex source, Vertex destination) const;
+    // /**
+    //  * Gets the weight of the edge between two vertices.
+    //  */
+    // int getEdgeWeight(Vertex source, Vertex destination) const;
 
     /**
      * Inserts a new vertex into the graph
@@ -76,7 +80,7 @@ class Graph {
     //Below space-time complexity may get large, consider returning just the highest rank airport/5 highest ranked airports - Aadarsh
     Vertex PageRank(); //PageRank Algoirhtm - Krushank, Aadarsh Returns a vector arranging vertices by rank,
     
-    std::vector<Edge> Dijkstras(); //Dijkstra's Algorithm - Shaarav, Aadarsh Returns a vector of edges representing shortest path
+    std::vector<Edge> Dijkstras(Vertex source, Vertex destination); //Dijkstra's Algorithm - Shaarav, Aadarsh Returns a vector of edges representing shortest path
 
     private:
         std::map<Vertex, std::map<Vertex, Edge>> adjacency_list; //adajacency list

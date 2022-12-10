@@ -60,6 +60,7 @@ Vertex Graph::getStartingVertex() const { //COMPILES
 
 void Graph::insertVertex(Vertex v) {
     //Not needed anymore
+    (void)v;
 }
 
 bool Graph::insertEdge(Vertex source, Vertex destination) {
@@ -125,4 +126,69 @@ Vertex Graph::PageRank() {
         }
     }
     return maxVertex;
+}
+
+Edge Graph::getEdge(Vertex start, Vertex end) const {
+    Edge e; //Nothing found
+    std::map<Vertex, Edge> map = adjacency_list.at(start);
+
+    for (auto entry : map) {
+        if (entry.first == end) {
+            return entry.second;
+        }
+    }
+    return e; //Nothing found, empty edge
+}
+
+vector<Vertex> Graph::getAdjacent(Vertex source) const {
+    std::vector<Vertex> v;
+    std::map<Vertex, Edge> map = adjacency_list.at(source);
+    for (auto entry : map) {
+        v.push_back(entry.first);
+    }
+    return v;
+}
+
+
+std::vector<Edge> Graph::Dijkstras(Vertex source, Vertex destination) {
+    std::vector<Edge> to_return;
+    std::map<Vertex,int> vertices;
+    std::vector<Vertex> node;
+    std::map<Vertex,Vertex> previous;
+    std::set<Vertex> visited;
+
+    for(auto it = adjacency_list.begin(); it != adjacency_list.end(); ++it) {
+        node.push_back(it->first);
+        if(it->first != source) {
+            vertices.insert(pair<Vertex,int>(it->first,INT16_MAX));
+        } else {
+            vertices.insert(pair<Vertex,int>(it->first,0));
+        }
+        
+    }
+    std::priority_queue<Vertex,std::vector<Vertex>,std::greater<Vertex>>prop(node.begin(),node.end());
+    while (prop.top() != destination) 
+    {
+        Vertex c = prop.top();
+        visited.insert(c);
+        prop.pop();
+        for(Vertex neighbor : getAdjacent(c)) {
+            if(visited.find(neighbor) == visited.end()) {
+                Edge l = getEdge(c,neighbor);
+                if(l.getDistance() < (double)(vertices.at(c))) {
+                    vertices.at(c) = l.getDistance();
+                    previous.insert(pair<Vertex,Vertex>(c,neighbor));
+                    to_return.push_back(l);
+                }
+            }
+            
+        }
+
+    }
+    // for(Edge c : to_return) {
+    //     std::cout << c.getStart(). << "  " << c.getEnd().a << endl;
+    // }
+    return to_return;
+    //return std::vector<Edge>();
+    
 }

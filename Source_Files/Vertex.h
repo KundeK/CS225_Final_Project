@@ -17,7 +17,21 @@ class Vertex {
             return false;
         }
 
+        bool operator==(const Vertex& other) const {
+            if (this->airport_id_ == other.airport_id_) {
+                return true;
+            }
+            return false;
+        }
+
         bool operator<(const Vertex& other) const {
+            if (this->airport_name_ < other.airport_name_) {
+                return true;
+            }
+            return false;
+        }
+
+        bool operator>(const Vertex& other) const {
             if (this->airport_name_ < other.airport_name_) {
                 return true;
             }

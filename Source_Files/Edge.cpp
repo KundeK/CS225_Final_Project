@@ -3,6 +3,10 @@
 
 //TODO Aadarsh
 
+Edge::Edge() {
+    
+}
+
 Edge::Edge(Vertex start, Vertex end) {
     start_airport_ = start;
     end_airport_ = end;

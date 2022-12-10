@@ -60,6 +60,7 @@ Vertex Graph::getStartingVertex() const { //COMPILES
 
 void Graph::insertVertex(Vertex v) {
     //Not needed anymore
+    (void)v;
 }
 
 bool Graph::insertEdge(Vertex source, Vertex destination) {
@@ -125,6 +126,27 @@ Vertex Graph::PageRank() {
         }
     }
     return maxVertex;
+}
+
+Edge Graph::getEdge(Vertex start, Vertex end) const {
+    Edge e; //Nothing found
+    std::map<Vertex, Edge> map = adjacency_list.at(start);
+
+    for (auto entry : map) {
+        if (entry.first == end) {
+            return entry.second;
+        }
+    }
+    return e; //Nothing found, empty edge
+}
+
+vector<Vertex> Graph::getAdjacent(Vertex source) const {
+    std::vector<Vertex> v;
+    std::map<Vertex, Edge> map = adjacency_list.at(source);
+    for (auto entry : map) {
+        v.push_back(entry.first);
+    }
+    return v;
 }
 
 

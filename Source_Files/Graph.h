@@ -57,10 +57,10 @@ class Graph {
      */
     std::string getEdgeLabel(Vertex source, Vertex destination) const;
 
-    /**
-     * Gets the weight of the edge between two vertices.
-     */
-    int getEdgeWeight(Vertex source, Vertex destination) const;
+    // /**
+    //  * Gets the weight of the edge between two vertices.
+    //  */
+    // int getEdgeWeight(Vertex source, Vertex destination) const;
 
     /**
      * Inserts a new vertex into the graph

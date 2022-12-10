@@ -104,17 +104,24 @@ int main(int argc, char** argv) {
     fin2.close();
 
     //For-loop for map data-verification, should be commented out unless testing
-    for(auto it = data2.cbegin(); it != data2.cend(); it++){
-        std::cout << it->first << ", " << 
-                     it->second.first << ", " << 
-                     it->second.second.first << ", " << 
-                     it->second.second.second.first << ", " <<
-                     it->second.second.second.second.first << ", " << 
-                     it->second.second.second.second.second << std::endl; 
-    }
+    // for(auto it = data2.cbegin(); it != data2.cend(); it++){
+    //     std::cout << it->first << ", " << 
+    //                  it->second.first << ", " << 
+    //                  it->second.second.first << ", " << 
+    //                  it->second.second.second.first << ", " <<
+    //                  it->second.second.second.second.first << ", " << 
+    //                  it->second.second.second.second.second << std::endl; 
+    // }
 
-
+    std::cout << "Have gotten here" << std::endl;
     Graph g(data, data2);
+    std::cout << "Have gotten past graph construction" << std::endl;
+    std::vector<Vertex> v = g.getAdjacent(g.getStartingVertex());
+    std::vector<Edge> cal = g.Dijkstras(g.getStartingVertex(), v.back());
+    for (Edge c : cal) {
+        cout << c.getAirline() << endl;
+    }
+    std::cout << "Have gotten past Dijkstra" << std::endl;
     return 0;
 }
 

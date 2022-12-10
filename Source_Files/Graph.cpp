@@ -152,16 +152,20 @@ std::vector<Edge> Graph::Dijkstras(Vertex source, Vertex destination) {
         prop.pop();
         for(Vertex neighbor : getAdjacent(c)) {
             if(visited.find(neighbor) == visited.end()) {
-                if(getEdgeWeight(c,neighbor) < vertices.at(c)) {
-                    vertices.at(c) = getEdgeWeight(c,neighbor);
+                Edge l = getEdge(c,neighbor);
+                if(l.getDistance() < (double)(vertices.at(c))) {
+                    vertices.at(c) = l.getDistance();
                     previous.insert(pair<Vertex,Vertex>(c,neighbor));
-                    to_return.push_back(getEdge(c,neighbor));
+                    to_return.push_back(l);
                 }
             }
             
         }
 
     }
+    // for(Edge c : to_return) {
+    //     std::cout << c.getStart(). << "  " << c.getEnd().a << endl;
+    // }
     return to_return;
     //return std::vector<Edge>();
     

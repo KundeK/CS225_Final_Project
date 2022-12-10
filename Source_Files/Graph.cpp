@@ -126,3 +126,40 @@ Vertex Graph::PageRank() {
     }
     return maxVertex;
 }
+
+
+std::vector<Edge> Graph::Dijkstras(Vertex source, Vertex destination) {
+    std::vector<Edge> to_return;
+    std::map<Vertex,int> vertices;
+    std::map<Vertex,Vertex> previous;
+    std::set<Vertex> visited;
+
+    for(auto it = adjacency_list.begin(); it != adjacency_list.end(); ++it) {
+        if(it->first != source) {
+            vertices.insert(pair<Vertex,int>(it->first,INT16_MAX));
+        } else {
+            vertices.insert(pair<Vertex,int>(it->first,0));
+        }
+        
+    }
+    std::priority_queue<Vertex,std::vector<Vertex>,std::greater<Vertex>>prop(vertices.begin(),vertices.end());
+    while (prop.top() != destination) 
+    {
+        Vertex c = prop.top();
+        visited.insert(c);
+        prop.pop();
+        for(Vertex neighbor : getAdjacent(c)) {
+            if(visited.find(neighbor) == visited.end()) {
+                if(getEdgeWeight(c,neighbor) < vertices.at(c)) {
+                    vertices.at(c) = getEdgeWeight(c,neighbor);
+                    previous.insert(pair<Vertex,Vertex>(c,neighbor));
+                    to_return.push_back(getEdge(c,neighbor));
+                }
+            }
+            
+        }
+
+    }
+    return to_return;
+    
+}

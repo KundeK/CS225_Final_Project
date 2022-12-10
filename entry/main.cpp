@@ -115,6 +115,7 @@ int main(int argc, char** argv) {
 
 
     Graph g(data, data2);
+    std::cout << g.PageRank().getAirportName() << std::endl;
     return 0;
 }
 

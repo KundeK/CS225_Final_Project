@@ -131,10 +131,12 @@ Vertex Graph::PageRank() {
 std::vector<Edge> Graph::Dijkstras(Vertex source, Vertex destination) {
     std::vector<Edge> to_return;
     std::map<Vertex,int> vertices;
+    std::vector<Vertex> node;
     std::map<Vertex,Vertex> previous;
     std::set<Vertex> visited;
 
     for(auto it = adjacency_list.begin(); it != adjacency_list.end(); ++it) {
+        node.push_back(it->first);
         if(it->first != source) {
             vertices.insert(pair<Vertex,int>(it->first,INT16_MAX));
         } else {
@@ -142,7 +144,7 @@ std::vector<Edge> Graph::Dijkstras(Vertex source, Vertex destination) {
         }
         
     }
-    std::priority_queue<Vertex,std::vector<Vertex>,std::greater<Vertex>>prop(vertices.begin(),vertices.end());
+    std::priority_queue<Vertex,std::vector<Vertex>,std::greater<Vertex>>prop(node.begin(),node.end());
     while (prop.top() != destination) 
     {
         Vertex c = prop.top();
@@ -161,5 +163,6 @@ std::vector<Edge> Graph::Dijkstras(Vertex source, Vertex destination) {
 
     }
     return to_return;
+    //return std::vector<Edge>();
     
 }

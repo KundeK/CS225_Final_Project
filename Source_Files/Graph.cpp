@@ -68,65 +68,88 @@ bool Graph::insertEdge(Vertex source, Vertex destination) {
 }
 
 
-unsigned int Graph::getDegree(Vertex node) { //For Krushank's PageRank
+double Graph::getDegree(Vertex node) { //For Krushank's PageRank
     return adjacency_list[node].size();
 }
 
 
 //Finished, needs to be tested
 Vertex Graph::PageRank() {
-    
-    // vector of vertex initialized as rank;
-    //adjacency_list (Key->Vertex, Value-> Map of Vertex and Key)
-    std::map<Vertex, double> rank;
-    std::vector<Vertex> vertices;
-    int d = 0.15;
-
-    // N <- number of nodes in G (number of airports)
-
-    //get all vertices
-    for (std::map<Vertex, std::map<Vertex, Edge>>::iterator iter = adjacency_list.begin(); iter != adjacency_list.end(); ++iter) {
-        vertices.push_back(iter->first);
-    }
-    double N = (double) vertices.size();
-    Vertex startingVertex = vertices[0];
-    
-    // For every node V in Graph:
-    //     Initialize the rank of the node to be 1/N 
-    //         - Rank(V) = 1/N
-    
-    for (Vertex v : vertices) {
-        std::pair<Vertex, double> pair = std::pair<Vertex, size_t>(v, 1 / N);
-        rank.insert(pair);
-    }
-
-    // for every vertex in graph
-    //     For every node from ui (# of neighbors of current node) and uj (number of nodes with no outlinks) with no outlinks
-    //         SUM_OF_RANKS_CALC = sum(rank(ui)/# of outlinks of ui)
-    //         Rank(current node) = (d/N) + (1-d) * SUM_OF_RANKS_CAL
-    std::vector<Vertex> neighbors;
-    for (std::map<Vertex, Edge>::iterator iter = adjacency_list[startingVertex].begin(); iter != adjacency_list[startingVertex].end(); ++iter) {
-        neighbors.push_back(iter->first);
-    }
-    double sum_rank_ui = 0;
-    for (Vertex v : vertices) {
-        for (Vertex ui : neighbors) {
-            sum_rank_ui += rank[ui] / getDegree(v);
-        }
-        rank[v] = (d / N) + ((1-d) * (sum_rank_ui));
-    }
-
-
-    Vertex maxVertex = startingVertex;
-    size_t maxNum = 0;
-    for (std::map<Vertex, double>::iterator it = rank.begin(); it != rank.end(); ++it) {
-        if (it->second > maxNum) {
-            maxVertex = it->first;
-            maxNum = it->second;
-        }
-    }
-    return maxVertex;
+  
+   std::map<Vertex, double> old_rank;
+   std::map<Vertex, double> new_rank;
+   std::vector<Vertex> vertices;
+   std::vector<Vertex> no_outlinks;
+   double d = 0.85;
+ 
+   // N <- number of nodes in G (number of airports)
+ 
+   //get all vertices
+   for (std::map<Vertex, std::map<Vertex, Edge>>::iterator iter = adjacency_list.begin(); iter != adjacency_list.end(); ++iter) {
+       vertices.push_back(iter->first);
+       if (iter->second.size() == 0) {
+           no_outlinks.push_back(iter->first);
+       }
+   }
+   double N = (double) vertices.size();
+  
+   // For every node V in Graph:
+   //     Initialize the rank of the node to be 1/N
+   //         - Rank(V) = 1/N
+ 
+   for (Vertex v : vertices) {
+       std::pair<Vertex, double> pair = std::pair<Vertex, double>(v, 1.0 / N);
+       old_rank.insert(pair);
+       new_rank.insert(pair); //initialization for new_pagerank (will be overridden)
+   }
+ 
+   // for every vertex in graph
+   //     For every node from ui (# of neighbors of current node) and uj (number of nodes with no outlinks) with no outlinks
+   //         SUM_OF_RANKS_CALC = sum(rank(ui)/# of outlinks of ui)
+   //         Rank(current node) = (d/N) + (1-d) * SUM_OF_RANKS_CAL
+  
+   for (Vertex v : vertices) {
+       double dp = 0;
+       for (Vertex uj : no_outlinks) {
+           dp += d * (old_rank[uj] / N);
+       }
+ 
+       for (Vertex ui : vertices) {
+           new_rank[ui] = dp + ((1-d) / N);
+           std::vector<Vertex> inlinks;
+           for (std::map<Vertex, std::map<Vertex, Edge>>::iterator iter = adjacency_list.begin(); iter != adjacency_list.end(); ++iter) {
+               for (std::map<Vertex, Edge>::iterator it = iter->second.begin(); it != iter->second.end(); ++it) {
+                   if (it->first == ui) {
+                       inlinks.push_back(iter->first);
+                   }
+               }
+           }
+           for (Vertex v_in : inlinks) {
+               new_rank[ui] += (d * old_rank[v_in]) / getDegree(v_in);
+           }
+       }
+      
+       for (std::map<Vertex, double>::iterator iter = old_rank.begin(); iter != old_rank.end(); ++iter) {
+           old_rank[iter->first] = new_rank[iter->first];
+       }
+   }
+ 
+ 
+ 
+   Vertex maxVertex;
+   double maxNum = 0.0;
+   for (std::map<Vertex, double>::iterator it = new_rank.begin(); it != new_rank.end(); ++it) {
+       if (it->second > maxNum) {
+           maxVertex = it->first;
+           maxNum = it->second;
+       }
+   }
+ 
+   std::cout << "Rank: " << new_rank[maxVertex] << std::endl;
+   std::cout << "Size of map: " << adjacency_list[maxVertex].size() << std::endl;
+   return maxVertex;
 }
+
 
 Edge Graph::getEdge(Vertex start, Vertex end) const {
     Edge e; //Nothing found

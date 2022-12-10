@@ -73,7 +73,7 @@ class Graph {
     bool insertEdge(Vertex source, Vertex destination);
 
 
-    unsigned int getDegree(Vertex node);
+    double getDegree(Vertex node);
 
 
 

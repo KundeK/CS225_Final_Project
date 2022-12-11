@@ -1,13 +1,16 @@
-#include <catch2/catch_test_macros.hpp>
-
 #include <iostream>
 
 //Graph Test Cases - Aadarsh
 
-TEST_CASE("Construct Graph Simple", "[weight=1][part=Graph]") {
-    // int v = 0;
-    REQUIRE(0 == 0);
+int main () {
+    //Test Constructing Graph
+    
+
+
+
 }
+
+
 
 // TEST_CASE("Construct Graph Complex", "[weight=4][part=Graph]") {
     

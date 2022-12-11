@@ -25,28 +25,36 @@ Graph::Graph(std::multimap<std::string, std::pair<std::string, std::pair<std::st
                     //Go through routes data
                     for(auto it = route_data.cbegin(); it != route_data.cend(); it++) {
                         //Add an edge between source airport and dest airport
-                        Vertex start = id_to_vertex[it->second.second.second.first];
-                        Vertex end = id_to_vertex[it->second.second.second.second.second];
-                        Edge e(start, end); //Error could be id doesn't exist in vertices
-                        
-                        double dist = start.getEdgeWeight(start.getLat(), start.getLong(), end.getLat(), end.getLong());
+                        Vertex start;
+                        Vertex end;
+                        Edge e;
+                        try {
+                            Vertex start = id_to_vertex[it->second.second.second.first];
+                            Vertex end = id_to_vertex[it->second.second.second.second.second];
+                            Edge e(start, end); //Error could be id doesn't exist in vertices
 
-                        //SET EDGE WEIGHT
-                        e.setDistance(dist);
-                        
-                        //SET AIRLINE LABEL HERE 
-                        e.setLabel(it->first);
+                            double dist = start.getEdgeWeight(start.getLat(), start.getLong(), end.getLat(), end.getLong());
 
-                        //Check if start vertex exists in map
-                        //If it does exist, add to its map
-                        if (adjacency_list.find(id_to_vertex[it->second.second.second.first]) == adjacency_list.end()) {
-                            std::map<Vertex, Edge> adj;
-                            adj.insert({e.getEnd(), e});
-                            adjacency_list.insert({e.getStart(), adj});
-                        } else { //If it doesn't, create a new insertion in existing map
-                            adjacency_list[e.getStart()].insert({e.getEnd(), e});
+                            //SET EDGE WEIGHT
+                            e.setDistance(dist);
+                        
+                            //SET AIRLINE LABEL HERE 
+                            e.setLabel(it->first);
+
+                            //Check if start vertex exists in map
+                            //If it does exist, add to its map
+                            if (adjacency_list.find(id_to_vertex[it->second.second.second.first]) == adjacency_list.end()) {
+                                std::map<Vertex, Edge> adj;
+                                adj.insert({e.getEnd(), e});
+                                adjacency_list.insert({e.getStart(), adj});
+                            } else { //If it doesn't, create a new insertion in existing map
+                                adjacency_list[e.getStart()].insert({e.getEnd(), e});
+                            }
+                        } catch (...) {
+                            //std::cout << "Start and/or end Airports don't exist in graph" << std::endl;
                         }
-
+                        
+                        
                     }
 
 

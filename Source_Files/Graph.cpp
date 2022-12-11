@@ -72,6 +72,7 @@ void Graph::insertVertex(Vertex v) {
 }
 
 bool Graph::insertEdge(Vertex source, Vertex destination) {
+    //Not needed/used
     return true;
 }
 

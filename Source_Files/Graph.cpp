@@ -180,6 +180,28 @@ vector<Vertex> Graph::getAdjacent(Vertex source) const {
     return v;
 }
 
+bool Graph::vertexExists (Vertex v) const {
+    if (adjacency_list.find(v) != adjacency_list.end()) {
+        return true;
+    } 
+    return false;
+}
+
+bool Graph::edgeExists(Vertex source, Vertex destination) const {
+    if (adjacency_list.find(source) == adjacency_list.end()) {
+        return false;
+    } 
+    std::map<Vertex, Edge> map = adjacency_list.at(source);
+
+    for (auto entry : map) {
+        if (entry.first == destination) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 
 std::vector<Edge> Graph::Dijkstras(Vertex source, Vertex destination) {
     std::vector<Edge> to_return;

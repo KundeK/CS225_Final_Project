@@ -30,6 +30,11 @@ long double Vertex::toRadians(long double degree) {
     return (one_deg * degree);
 }
 
+std::string Vertex::getAirportName() {
+   return airport_name_;
+}
+
+
 long double Vertex::getEdgeWeight(long double lat1, long double long1, long double lat2, long double long2) {
     lat1 = toRadians(lat1);
     long1 = toRadians(long1);

@@ -26,7 +26,7 @@ vertex.o : ../Source_Files/Vertex.cpp ../Source_Files/Vertex.h
 	$(CXX) $(CXXFLAGS) ../Source_Files/Vertex.cpp
 
 
-# test: output_msg ../catch/catchmain.cpp ../tests/graph-tests.cpp graph.cpp vertex.cpp utility.cpp
-# 	$(LD) ../catch/catchmain.cpp ../tests/graph-tests.cpp graph.cpp vertex.cpp utility.cpp $(LDFLAGS) -o test
+test: output_msg ../tests/tests.cpp ../Source_Files/Graph.cpp ../Source_Files/Edge.cpp ../Source_Files/Vertex.cpp
+	$(LD) ../tests/tests.cpp ../Source_Files/Graph.cpp ../Source_Files/Edge.cpp ../Source_Files/Vertex.cpp -o test
 
 .PHONY: output_msg

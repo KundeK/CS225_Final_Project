@@ -18,6 +18,7 @@ int main(int argc, char** argv) {
 
     if (argc != 3) {
         std::cout << "Not enough inputs!" << std::endl;
+        return -1;
     }
 
 

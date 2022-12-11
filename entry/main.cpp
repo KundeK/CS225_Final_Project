@@ -12,12 +12,22 @@ int main(int argc, char** argv) {
     //DO DATA PROCESSING HERE, FEED IN PATH TO CSV FILE THROUGH TERMINAL
     //READ FROM CSV FILE BY CALLING extractCSVData Method
     //TODO Shreyas, Shaarav
-    argc = 0;       //Processing doesn't work unless arguments are used at some point
-    **argv = ' ';   //These variables will be modified later on
+
+
+    /* AADARSH - ADDED COMMAND LINE ARGUMENT VARIABLE INPUT */
+
+    if (argc != 3) {
+        std::cout << "Not enough inputs!" << std::endl;
+    }
+
+
+
+    // argc = 0;       //Processing doesn't work unless arguments are used at some point
+    // **argv = ' ';   //These variables will be modified later on
     //TIME COMPLEXITY IS VASTLY IMPROVED WHEN COMMENTING OUT THE TEST FOR-LOOPS
 
     //airports.dat
-    std::ifstream fin("airports.dat");  //Open file
+    std::ifstream fin(argv[1]);  //Open file
     if(!fin){                           //Checking if file open
         std::cout << "Could not open file" << std::endl;
         return -1;
@@ -53,20 +63,20 @@ int main(int argc, char** argv) {
     fin.close();
 
     //For-loop for map data-verification, should be commented out unless testing
-    for(auto it = data.cbegin(); it != data.cend(); it++){
-        std::cout << it->first << ", " << 
-                     it->second.first << ", " << 
-                     it->second.second.first << ", " << 
-                     it->second.second.second.first << ", " <<
-                     it->second.second.second.second.first << ", " << 
-                     it->second.second.second.second.second.first << ", " <<
-                     it->second.second.second.second.second.second.first << ", " << 
-                     it->second.second.second.second.second.second.second << std::endl; 
-    }
+    // for(auto it = data.cbegin(); it != data.cend(); it++){
+    //     std::cout << it->first << ", " << 
+    //                  it->second.first << ", " << 
+    //                  it->second.second.first << ", " << 
+    //                  it->second.second.second.first << ", " <<
+    //                  it->second.second.second.second.first << ", " << 
+    //                  it->second.second.second.second.second.first << ", " <<
+    //                  it->second.second.second.second.second.second.first << ", " << 
+    //                  it->second.second.second.second.second.second.second << std::endl; 
+    // }
 
 
     //routes.dat
-    std::ifstream fin2("routes.dat");    //Open file
+    std::ifstream fin2(argv[2]);    //Open file
     if(!fin2){                           //Checking if file open
         std::cout << "Could not open file" << std::endl;
         return -1;
@@ -104,14 +114,14 @@ int main(int argc, char** argv) {
     fin2.close();
 
     //For-loop for map data-verification, should be commented out unless testing
-    for(auto it = data2.cbegin(); it != data2.cend(); it++){
-        std::cout << it->first << ", " << 
-                     it->second.first << ", " << 
-                     it->second.second.first << ", " << 
-                     it->second.second.second.first << ", " <<
-                     it->second.second.second.second.first << ", " << 
-                     it->second.second.second.second.second << std::endl; 
-    }
+    // for(auto it = data2.cbegin(); it != data2.cend(); it++){
+    //     std::cout << it->first << ", " << 
+    //                  it->second.first << ", " << 
+    //                  it->second.second.first << ", " << 
+    //                  it->second.second.second.first << ", " <<
+    //                  it->second.second.second.second.first << ", " << 
+    //                  it->second.second.second.second.second << std::endl; 
+    // }
 
 
     Graph g(data, data2);

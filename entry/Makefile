@@ -16,8 +16,8 @@ $(EXENAME) : output_msg $(OBJS)
 main.o : main.cpp ../Source_Files/Graph.cpp ../Source_Files/Graph.h
 	$(CXX) $(CXXFLAGS) main.cpp
 
-graph.o : ../Source_Files/Graph.cpp ../Source_Files/Graph.h ../Source_Files/Vertex.cpp ../Source_Files/Vertex.h ../Source_Files/Edge.h ../Source_Files/Edge.cpp
-	$(CXX) $(CXXFLAGS) ../Source_Files/Graph.cpp
+# graph.o : ../Source_Files/Graph.cpp ../Source_Files/Graph.h ../Source_Files/Vertex.cpp ../Source_Files/Vertex.h ../Source_Files/Edge.h ../Source_Files/Edge.cpp
+# 	$(CXX) $(CXXFLAGS) ../Source_Files/Graph.cpp
 
 edge.o : ../Source_Files/Edge.cpp ../Source_Files/Edge.h ../Source_Files/Vertex.h ../Source_Files/Vertex.cpp
 	$(CXX) $(CXXFLAGS) ../Source_Files/Edge.cpp

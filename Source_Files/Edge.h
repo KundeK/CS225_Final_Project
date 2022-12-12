@@ -25,15 +25,18 @@ class Edge {
         //     return amount_of_flight_ < other.amount_of_flight_;
         // }
 
-        // bool operator==(Edge& other) const {
-        //     if (this->start_airport_ != other.start_airport_) {
-        //         return false;
-        //     }
-        //     if (this->end_airport_ != other.end_airport_) {
-        //         return false;
-        //     }
-        //     return true;
-        // }
+        bool operator!=(Edge& other) const {
+            if (this->start_airport_ != other.start_airport_) {
+                return true;
+            }
+            if (this->end_airport_ != other.end_airport_) {
+                return true;
+            }
+            if (this->airline_ != other.airline_) {
+                return true;
+            }
+            return false;
+        }
 
     private:
         Vertex start_airport_; //Beginning of edge

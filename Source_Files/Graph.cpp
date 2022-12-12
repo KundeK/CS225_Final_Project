@@ -73,6 +73,8 @@ void Graph::insertVertex(Vertex v) {
 
 bool Graph::insertEdge(Vertex source, Vertex destination) {
     //Not needed/used
+    (void)source;
+    (void)destination;
     return true;
 }
 
@@ -258,4 +260,14 @@ std::vector<Edge> Graph::Dijkstras(Vertex source, Vertex destination) {
     return to_return;
     //return std::vector<Edge>();
     
+}
+
+Vertex Graph::getVertex(std::string id) {
+    Vertex v;
+    for (auto map : adjacency_list) {
+        if (map.first.getID() == id) {
+            return map.first;
+        }
+    }
+    return v;
 }

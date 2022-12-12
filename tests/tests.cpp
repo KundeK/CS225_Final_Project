@@ -133,7 +133,7 @@ int main (int argc, char** argv) {
     }
 
     if (!g.edgeExists("3484", "3759")) {
-        std::cout << "TEST FAILED, THERE SHOULD BE AN EDGE FROM LAX TO CMH" << std::endl; //There should be an edge representing the route from LAX to ATL
+        std::cout << "TEST FAILED, THERE SHOULD BE AN EDGE FROM LAX TO CMH" << std::endl; //There should be an edge representing the route from LAX to CMH
     } else {
         std::cout << "TEST PASSED!" << std::endl;
         std::cout << std::endl;

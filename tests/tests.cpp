@@ -183,11 +183,13 @@ int main (int argc, char** argv) {
 
     //TEST Dijkstra's ALG : Should return the Edge between LAX and AMS as the shortest path from LAX to ATL
     try {
-        std::vector<Edge> e = g.Dijkstras(g.getVertex("3484"), g.getVertex("3682"));
+        std::vector<Edge> e = g.Dijkstras(g.getVertex("3484"), g.getVertex("3520"));
 
         if (e.size() == 1) {
-            if (g.getEdge(g.getVertex("3484"), g.getVertex("580")) != e.at(0)) {
+            if (g.getEdge(g.getVertex("3484"), g.getVertex("3520")) != e.at(0)) {
                 std::cout << "TEST FAILED, RETURNED EDGE IS INCORRECT" << std::endl;
+                std::cout << "Start Airport ID Should Be 3484 was: " << e.at(0).getStart().getID() << std::endl;
+                std::cout << "End Airport ID Should Be 3520 was: " << e.at(0).getEnd().getID() << std::endl;
             } else {
                 std::cout << "TEST PASSED!" << std::endl;
                 num_passing++;
@@ -198,9 +200,9 @@ int main (int argc, char** argv) {
             std::cout << std::endl;
         }
 
-        std::cout << num_passing << "/" << tot << " test passed." << std::endl;
+        std::cout << num_passing << "/" << tot << " tests passed." << std::endl;
     } catch (...) {
-        std::cout << num_passing << "/" << tot << " test passed." << std::endl;
+        std::cout << num_passing << "/" << tot << " tests passed." << std::endl;
     }
     
 

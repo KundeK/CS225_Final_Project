@@ -9,9 +9,7 @@
 #include "../Source_Files/Graph.h"
 
 int main(int argc, char** argv) {
-    //DO DATA PROCESSING HERE, FEED IN PATH TO CSV FILE THROUGH TERMINAL
-    //READ FROM CSV FILE BY CALLING extractCSVData Method
-    //TODO Shreyas, Shaarav
+    //DO DATA PROCESSING HERE, FEED IN PATH TO DAT FILE THROUGH TERMINAL
 
 
     /* AADARSH - ADDED COMMAND LINE ARGUMENT VARIABLE INPUT */
@@ -22,9 +20,6 @@ int main(int argc, char** argv) {
     }
 
 
-
-    // argc = 0;       //Processing doesn't work unless arguments are used at some point
-    // **argv = ' ';   //These variables will be modified later on
     //TIME COMPLEXITY IS VASTLY IMPROVED WHEN COMMENTING OUT THE TEST FOR-LOOPS
 
     //airports.dat
@@ -62,18 +57,6 @@ int main(int argc, char** argv) {
         }
     }
     fin.close();
-
-    //For-loop for map data-verification, should be commented out unless testing
-    // for(auto it = data.cbegin(); it != data.cend(); it++){
-    //     std::cout << it->first << ", " << 
-    //                  it->second.first << ", " << 
-    //                  it->second.second.first << ", " << 
-    //                  it->second.second.second.first << ", " <<
-    //                  it->second.second.second.second.first << ", " << 
-    //                  it->second.second.second.second.second.first << ", " <<
-    //                  it->second.second.second.second.second.second.first << ", " << 
-    //                  it->second.second.second.second.second.second.second << std::endl; 
-    // }
 
 
     //routes.dat
@@ -114,19 +97,14 @@ int main(int argc, char** argv) {
     }
     fin2.close();
 
-    //For-loop for map data-verification, should be commented out unless testing
-    // for(auto it = data2.cbegin(); it != data2.cend(); it++){
-    //     std::cout << it->first << ", " << 
-    //                  it->second.first << ", " << 
-    //                  it->second.second.first << ", " << 
-    //                  it->second.second.second.first << ", " <<
-    //                  it->second.second.second.second.first << ", " << 
-    //                  it->second.second.second.second.second << std::endl; 
-    // }
-
-
+    //Create graph and call algs
     Graph g(data, data2);
-    //std::cout << g.PageRank().getAirportName() << std::endl;
+
+    std::cout << "PAGE RANK RESULT " << g.PageRank().getAirportName() << std::endl; //Page Rank
+
+    std::vector<Edge> e = g.Dijkstras(g.getVertex("3484"), g.getVertex("3520")); //Dijkstra's
+
+
 
     return 0;
 }

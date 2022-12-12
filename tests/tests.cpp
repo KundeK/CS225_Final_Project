@@ -19,11 +19,6 @@ int main (int argc, char** argv) {
     }
 
 
-
-    //argc = 0;       //Processing doesn't work unless arguments are used at some point
-    //**argv = ' ';   //These variables will be modified later on
-    //TIME COMPLEXITY IS VASTLY IMPROVED WHEN COMMENTING OUT THE TEST FOR-LOOPS
-
     //airports.dat
     std::ifstream fin(argv[1]);  //Open file
     if(!fin){                           //Checking if file open
@@ -61,6 +56,7 @@ int main (int argc, char** argv) {
     fin.close();
 
 
+    /* TESTS FOR ENSURING DATA WAS CLEANED AND PROCESSED CORRECTLY, MANUAL VERIFICATION */
 
     //For-loop for map data-verification, should be commented out unless testing
     // for(auto it = data.cbegin(); it != data.cend(); it++){
@@ -116,7 +112,7 @@ int main (int argc, char** argv) {
     fin2.close();
 
 
-
+    /* TESTS FOR ENSURING DATA WAS CLEANED AND PROCESSED CORRECTLY, MANUAL VERIFICATION */
 
     //For-loop for map data-verification, should be commented out unless testing
     // for(auto it = data2.cbegin(); it != data2.cend(); it++){
@@ -127,6 +123,7 @@ int main (int argc, char** argv) {
     //                  it->second.second.second.second.first << ", " << 
     //                  it->second.second.second.second.second << std::endl; 
     // }
+
 
 
     //TEST CASES FOR ALGS + GRAPH CONSTRUCTION
@@ -172,7 +169,7 @@ int main (int argc, char** argv) {
 
 
 
-    //TEST PAGE RANK ALG : Should return Denver international airport
+    //TEST PAGE RANK ALG : Should return Denver international airport as the most connected
     if (g.PageRank().getAirportName() != "\"Denver International Airport\"") {
         std::cout << "TEST FAILED, WRONG PAGE RANK OUTPUT" << std::endl; 
     } else {
@@ -181,7 +178,9 @@ int main (int argc, char** argv) {
         std::cout << std::endl;
     }
 
-    //TEST EDGE CASE, SAME AIRPORT
+
+
+    //TEST EDGE CASE for Dijkstra's, path between same airports
 
     try {
         std::vector<Edge> e = g.Dijkstras(g.getVertex("3484"), g.getVertex("3484"));
@@ -197,7 +196,6 @@ int main (int argc, char** argv) {
     }
     
     //TEST Dijkstra's ALG : Should return the Edge between LAX and AMS as the shortest path from LAX to AMS
-
 
     try {
         std::vector<Edge> e = g.Dijkstras(g.getVertex("3484"), g.getVertex("3520"));
@@ -221,6 +219,8 @@ int main (int argc, char** argv) {
     } catch (...) {
         std::cout << num_passing << "/" << tot << " tests passed." << std::endl;
     }
+    
+    /* Dijkstra's has some edge case issues but is mostly functional */
     
 
 

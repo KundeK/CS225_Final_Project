@@ -19,7 +19,7 @@ class Graph {
 
     Graph(std::multimap<std::string, std::pair<std::string, std::pair<std::string, std::pair<std::string,
                   std::pair<std::string, std::pair<std::string, std::pair<std::string, std::string>>>>>>> airport_data, std::multimap<std::string, std::pair<std::string, std::pair<std::string, std::pair<std::string,
-                  std::pair<std::string, std::string>>>>> route_data);
+                  std::pair<std::string, std::string>>>>> route_data); //Constructor that takes cleaned data
 
     
     /**
@@ -57,17 +57,6 @@ class Graph {
     bool edgeExists(Vertex source, Vertex destination) const;
 
     /**
-     * Inserts a new vertex into the graph
-     */
-    void insertVertex(Vertex v);
-
-    /**
-     * Inserts an edge between two vertices.
-     */
-    bool insertEdge(Vertex source, Vertex destination);
-
-
-    /**
     * Helper for Page Rank to get degree of a node
     */
     double getDegree(Vertex node);
@@ -77,14 +66,11 @@ class Graph {
     */
     Vertex getVertex(std::string id);
 
-
-
-    //Below space-time complexity may get large, consider returning just the highest rank airport/5 highest ranked airports - Aadarsh
-    Vertex PageRank(); //PageRank Algoirhtm - Krushank, Aadarsh Returns a vector arranging vertices by rank,
+    Vertex PageRank(); //PageRank Algoirhtm - returns busiest airport
     
-    std::vector<Edge> Dijkstras(Vertex source, Vertex destination); //Dijkstra's Algorithm - Shaarav, Aadarsh Returns a vector of edges representing shortest path
+    std::vector<Edge> Dijkstras(Vertex source, Vertex destination); //Dijkstra's Algorithm shortest path
 
     private:
-        std::map<Vertex, std::map<Vertex, Edge>> adjacency_list; //adajacency list
+        std::map<Vertex, std::map<Vertex, Edge>> adjacency_list; //adajacency list representation
 
 };

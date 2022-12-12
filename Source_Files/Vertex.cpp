@@ -1,8 +1,7 @@
 #include "Vertex.h"
 
-//TODO Aadarsh
-//ALL COMPILES
 
+//Paramaterized Constructor
 Vertex::Vertex(std::string id, std::string name, std::string city, std::string country, std::string iata, std::string icao, std::string lati, std::string longi) {
     airport_name_ = name;
     airport_id_ = id;
@@ -18,26 +17,28 @@ Vertex::Vertex() {
     //Default
 }
 
-double Vertex::getLat() {
+double Vertex::getLat() { //Getters
     return lat;
 }
-double Vertex::getLong() {
+double Vertex::getLong() { //Getters
     return lon;
 }
 
-long double Vertex::toRadians(long double degree) {
+long double Vertex::toRadians(long double degree) { //Helper to calc distance
     long double one_deg = (M_PI) / 180;
     return (one_deg * degree);
 }
 
-std::string Vertex::getAirportName() {
+std::string Vertex::getAirportName() { //Getters
    return airport_name_;
 }
 
-std::string Vertex::getID() const {
+std::string Vertex::getID() const { //Getters
     return airport_id_;
 }
 
+
+//Calculate distance method
 
 long double Vertex::getEdgeWeight(long double lat1, long double long1, long double lat2, long double long2) {
     lat1 = toRadians(lat1);

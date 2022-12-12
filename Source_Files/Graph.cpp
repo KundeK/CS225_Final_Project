@@ -16,10 +16,8 @@ Graph::Graph(std::multimap<std::string, std::pair<std::string, std::pair<std::st
                     for(auto it = airport_data.cbegin(); it != airport_data.cend(); it++){
                         Vertex port(it->first, it->second.first, it->second.second.first, it->second.second.second.first, it->second.second.second.second.first, it->second.second.second.second.second.first, it->second.second.second.second.second.second.first, it->second.second.second.second.second.second.second);
                         //Add these to adjacency list
-                        id_to_vertex.insert({it->first, port});
-                        //GONNA NEED A MAP OF AIRPORT ID, to LAT LONG
-                        //GONNA NEED MAP OF AIRPORT ID TO VERTEX
-                        id_to_latlong.insert({it->first, std::make_pair(port.getLat(), port.getLong())});
+                        id_to_vertex.insert({it->first, port}); //map id to vertex
+                        id_to_latlong.insert({it->first, std::make_pair(port.getLat(), port.getLong())}); //map id to lat long
                     }
 
                     //Go through routes data
@@ -62,21 +60,10 @@ Graph::Graph(std::multimap<std::string, std::pair<std::string, std::pair<std::st
 }
 
 
-Vertex Graph::getStartingVertex() const { //COMPILES
+Vertex Graph::getStartingVertex() const { //Just get whatever vertex is at the top of map
     return adjacency_list.begin()->first;
 }
 
-void Graph::insertVertex(Vertex v) {
-    //Not needed anymore
-    (void)v;
-}
-
-bool Graph::insertEdge(Vertex source, Vertex destination) {
-    //Not needed/used
-    (void)source;
-    (void)destination;
-    return true;
-}
 
 bool Graph::edgeExists(std::string air_id_1, std::string air_id_2) const {
     for (auto map : adjacency_list) {
@@ -168,9 +155,6 @@ Vertex Graph::PageRank() {
            maxNum = it->second;
        }
    }
- 
-//    std::cout << "Rank: " << new_rank[maxVertex] << std::endl;
-//    std::cout << "Size of map: " << adjacency_list[maxVertex].size() << std::endl;
    return maxVertex;
 }
 
@@ -198,14 +182,14 @@ vector<Vertex> Graph::getAdjacent(Vertex source) const {
 
 bool Graph::vertexExists (Vertex v) const {
     if (adjacency_list.find(v) != adjacency_list.end()) {
-        return true;
+        return true; //Found
     } 
-    return false;
+    return false; //Doesn't exist
 }
 
 bool Graph::edgeExists(Vertex source, Vertex destination) const {
     if (adjacency_list.find(source) == adjacency_list.end()) {
-        return false;
+        return false; //Vertex not in map
     } 
     std::map<Vertex, Edge> map = adjacency_list.at(source);
 
@@ -215,10 +199,11 @@ bool Graph::edgeExists(Vertex source, Vertex destination) const {
         }
     }
 
-    return false;
+    return false; //Doesn't exist
 }
 
 std::vector<Edge> Graph::Dijkstras(Vertex source, Vertex destination) {
+    //Follow class psuedo code, handle edge cases
     if(source == destination) {
         return std::vector<Edge>();
     }
@@ -265,6 +250,7 @@ std::vector<Edge> Graph::Dijkstras(Vertex source, Vertex destination) {
         }
 
     }
+    //Testing
     // for(Edge c : to_return) {
     //     std::cout << c.getStart(). << "  " << c.getEnd().a << endl;
     // }
@@ -275,7 +261,7 @@ std::vector<Edge> Graph::Dijkstras(Vertex source, Vertex destination) {
 
 
 
-Vertex Graph::getVertex(std::string id) {
+Vertex Graph::getVertex(std::string id) { //Get vertex from airport id
     Vertex v;
     for (auto map : adjacency_list) {
         if (map.first.getID() == id) {

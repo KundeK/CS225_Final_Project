@@ -156,8 +156,14 @@ int main (int argc, char** argv) {
 
 
 
-    //TEST PAGE RANK ALG
-    std::cout << g.PageRank().getAirportName() << std::endl;
+    //TEST PAGE RANK ALG : Should return Denver international airport
+    if (g.PageRank().getAirportName() != "\"Denver International Airport\"") {
+        std::cout << "TEST FAILED, WRONG PAGE RANK OUTPUT" << std::endl; 
+    } else {
+        std::cout << "TEST PASSED!" << std::endl;
+        std::cout << std::endl;
+    }
+
 
 
     return 0;

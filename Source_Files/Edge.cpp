@@ -4,7 +4,7 @@
 //TODO Aadarsh
 
 Edge::Edge() {
-    
+    //Default
 }
 
 Edge::Edge(Vertex start, Vertex end) {
@@ -25,7 +25,7 @@ Edge::Edge(Vertex start, Vertex end, std::string airline) {
     airline_ = airline;
 }
 
-Vertex Edge::getStart() {
+Vertex Edge::getStart() { //Getters for instance variables
     return start_airport_;
 }
 Vertex Edge::getEnd() {

@@ -21,9 +21,6 @@ class Edge {
         void setLabel(std::string a);
 
         //Overloaded operators
-        // bool operator<(const Edge& other) const {
-        //     return amount_of_flight_ < other.amount_of_flight_;
-        // }
 
         bool operator!=(Edge& other) const {
             if (this->start_airport_ != other.start_airport_) {

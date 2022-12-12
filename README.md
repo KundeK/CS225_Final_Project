@@ -37,12 +37,12 @@ To run main:
     cd into entry
     run ' g++ -c main.cpp ../Source_Files/Graph.cpp ../Source_Files/Vertex.cpp ../Source_Files/Edge.cpp ' 
     then run ' make main ' 
-    then run ' ./main ../entry/airports.dat ../routes.dat ' 
+    then run ' ./main ../entry/airports.dat ../entry/routes.dat ' 
    
     Alternatively:
         cd into Source_Files
         run ' clang++ -std=c++20 Edge.cpp Vertex.cpp Graph.cpp ../entry/main.cpp -Wall -Wextra -pedantic -o exec '
-        run ' ./exec ../entry/airports.dat ../routes.dat '
+        run ' ./exec ../entry/airports.dat ../entry/routes.dat '
 
 To run tests:
 

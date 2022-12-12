@@ -218,8 +218,19 @@ bool Graph::edgeExists(Vertex source, Vertex destination) const {
     return false;
 }
 
-
 std::vector<Edge> Graph::Dijkstras(Vertex source, Vertex destination) {
+    if(source == destination) {
+        return std::vector<Edge>();
+    }
+    std::vector<Vertex> adj = getAdjacent(source);
+    for(unsigned int i = 0; i < adj.size(); i++) {
+        if (adj[i] == destination) {
+            std::vector<Edge> value;
+            Edge l = getEdge(source,destination);
+            value.push_back(l);
+            return value;
+        }
+    }
     std::vector<Edge> to_return;
     std::map<Vertex,int> vertices;
     std::vector<Vertex> node;
@@ -261,6 +272,8 @@ std::vector<Edge> Graph::Dijkstras(Vertex source, Vertex destination) {
     //return std::vector<Edge>();
     
 }
+
+
 
 Vertex Graph::getVertex(std::string id) {
     Vertex v;

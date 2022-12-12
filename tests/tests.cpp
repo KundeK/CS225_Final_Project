@@ -6,7 +6,7 @@
 #include <cmath>
 #include "../Source_Files/Graph.h"
 
-//Graph Test Cases - Aadarsh
+//TEST SUITE, CONSTRUCT A SMALLER GRAPH AND TEST ALGS
 
 int main (int argc, char** argv) {
     //Test Constructing Graph
@@ -60,6 +60,8 @@ int main (int argc, char** argv) {
     }
     fin.close();
 
+
+
     //For-loop for map data-verification, should be commented out unless testing
     // for(auto it = data.cbegin(); it != data.cend(); it++){
     //     std::cout << it->first << ", " << 
@@ -71,6 +73,8 @@ int main (int argc, char** argv) {
     //                  it->second.second.second.second.second.second.first << ", " << 
     //                  it->second.second.second.second.second.second.second << std::endl; 
     // }
+
+
 
 
     //routes.dat
@@ -111,6 +115,9 @@ int main (int argc, char** argv) {
     }
     fin2.close();
 
+
+
+
     //For-loop for map data-verification, should be commented out unless testing
     // for(auto it = data2.cbegin(); it != data2.cend(); it++){
     //     std::cout << it->first << ", " << 
@@ -121,6 +128,8 @@ int main (int argc, char** argv) {
     //                  it->second.second.second.second.second << std::endl; 
     // }
 
+
+    //TEST CASES FOR ALGS + GRAPH CONSTRUCTION
 
     Graph g(data, data2);
 

@@ -25,28 +25,36 @@ Graph::Graph(std::multimap<std::string, std::pair<std::string, std::pair<std::st
                     //Go through routes data
                     for(auto it = route_data.cbegin(); it != route_data.cend(); it++) {
                         //Add an edge between source airport and dest airport
-                        Vertex start = id_to_vertex[it->second.second.second.first];
-                        Vertex end = id_to_vertex[it->second.second.second.second.second];
-                        Edge e(start, end); //Error could be id doesn't exist in vertices
-                        
-                        double dist = start.getEdgeWeight(start.getLat(), start.getLong(), end.getLat(), end.getLong());
+                        Vertex start;
+                        Vertex end;
+                        Edge e;
+                        try {
+                            Vertex start = id_to_vertex[it->second.second.second.first];
+                            Vertex end = id_to_vertex[it->second.second.second.second.second];
+                            Edge e(start, end); //Error could be id doesn't exist in vertices
 
-                        //SET EDGE WEIGHT
-                        e.setDistance(dist);
-                        
-                        //SET AIRLINE LABEL HERE 
-                        e.setLabel(it->first);
+                            double dist = start.getEdgeWeight(start.getLat(), start.getLong(), end.getLat(), end.getLong());
 
-                        //Check if start vertex exists in map
-                        //If it does exist, add to its map
-                        if (adjacency_list.find(id_to_vertex[it->second.second.second.first]) == adjacency_list.end()) {
-                            std::map<Vertex, Edge> adj;
-                            adj.insert({e.getEnd(), e});
-                            adjacency_list.insert({e.getStart(), adj});
-                        } else { //If it doesn't, create a new insertion in existing map
-                            adjacency_list[e.getStart()].insert({e.getEnd(), e});
+                            //SET EDGE WEIGHT
+                            e.setDistance(dist);
+                        
+                            //SET AIRLINE LABEL HERE 
+                            e.setLabel(it->first);
+
+                            //Check if start vertex exists in map
+                            //If it does exist, add to its map
+                            if (adjacency_list.find(id_to_vertex[it->second.second.second.first]) == adjacency_list.end()) {
+                                std::map<Vertex, Edge> adj;
+                                adj.insert({e.getEnd(), e});
+                                adjacency_list.insert({e.getStart(), adj});
+                            } else { //If it doesn't, create a new insertion in existing map
+                                adjacency_list[e.getStart()].insert({e.getEnd(), e});
+                            }
+                        } catch (...) {
+                            //std::cout << "Start and/or end Airports don't exist in graph" << std::endl;
                         }
-
+                        
+                        
                     }
 
 
@@ -64,7 +72,21 @@ void Graph::insertVertex(Vertex v) {
 }
 
 bool Graph::insertEdge(Vertex source, Vertex destination) {
+    //Not needed/used
     return true;
+}
+
+bool Graph::edgeExists(std::string air_id_1, std::string air_id_2) const {
+    for (auto map : adjacency_list) {
+        if (map.first.getID() == air_id_1) {
+            for (auto map2 : map.second) {
+                if (map2.first.getID() == air_id_2) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }
 
 
@@ -170,6 +192,28 @@ vector<Vertex> Graph::getAdjacent(Vertex source) const {
         v.push_back(entry.first);
     }
     return v;
+}
+
+bool Graph::vertexExists (Vertex v) const {
+    if (adjacency_list.find(v) != adjacency_list.end()) {
+        return true;
+    } 
+    return false;
+}
+
+bool Graph::edgeExists(Vertex source, Vertex destination) const {
+    if (adjacency_list.find(source) == adjacency_list.end()) {
+        return false;
+    } 
+    std::map<Vertex, Edge> map = adjacency_list.at(source);
+
+    for (auto entry : map) {
+        if (entry.first == destination) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 

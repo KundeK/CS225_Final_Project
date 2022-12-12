@@ -41,6 +41,7 @@ class Vertex {
         double getLat();
         double getLong();
         std::string getAirportName();
+        std::string getID() const;
 
         long double toRadians(long double degree);
         long double getEdgeWeight(long double lat1, long double long1, long double lat2, long double long2);

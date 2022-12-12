@@ -142,6 +142,7 @@ Edge Graph::getEdge(Vertex start, Vertex end) const {
 
 vector<Vertex> Graph::getAdjacent(Vertex source) const {
     std::vector<Vertex> v;
+    std::map<Vertex,Vertex> previous;
     std::map<Vertex, Edge> map = adjacency_list.at(source);
     for (auto entry : map) {
         v.push_back(entry.first);
@@ -151,44 +152,35 @@ vector<Vertex> Graph::getAdjacent(Vertex source) const {
 
 
 std::vector<Edge> Graph::Dijkstras(Vertex source, Vertex destination) {
-    std::vector<Edge> to_return;
+    
     std::map<Vertex,int> vertices;
     std::vector<Vertex> node;
-    std::map<Vertex,Vertex> previous;
     std::set<Vertex> visited;
-
+    std::map<Vertex, Vertex> prev;
     for(auto it = adjacency_list.begin(); it != adjacency_list.end(); ++it) {
         node.push_back(it->first);
-        if(it->first != source) {
-            vertices.insert(pair<Vertex,int>(it->first,INT16_MAX));
-        } else {
-            vertices.insert(pair<Vertex,int>(it->first,0));
-        }
+        vertices.insert(pair<Vertex,int>((it->first),INT16_MAX));
         
     }
+    vertices.at(source) = 0;
     std::priority_queue<Vertex,std::vector<Vertex>,std::greater<Vertex>>prop(node.begin(),node.end());
-    while (prop.top() != destination) 
-    {
-        Vertex c = prop.top();
-        visited.insert(c);
+
+    while(prop.top() != destination) {
+        Vertex tmp = prop.top();
         prop.pop();
-        for(Vertex neighbor : getAdjacent(c)) {
-            if(visited.find(neighbor) == visited.end()) {
-                Edge l = getEdge(c,neighbor);
-                if(l.getDistance() < (double)(vertices.at(c))) {
-                    vertices.at(c) = l.getDistance();
-                    previous.insert(pair<Vertex,Vertex>(c,neighbor));
-                    to_return.push_back(l);
+        int value = vertices.at(tmp);
+        for(auto m : adjacency_list.at(tmp)) {
+            Edge l = getEdge(tmp, m.first);
+            int sec_dist = value + l.getDistance();
+            if(visited.find(m.first) == visited.end()) {
+                if(sec_dist < vertices.at(m.first)) {
+                    vertices.at(m.first) = sec_dist;
+                    prev.insert(std::pair<Vertex,Vertex>(m.first,tmp));
                 }
             }
-            
         }
-
+        visited.insert(tmp);
     }
-    // for(Edge c : to_return) {
-    //     std::cout << c.getStart(). << "  " << c.getEnd().a << endl;
-    // }
-    return to_return;
-    //return std::vector<Edge>();
+    return vector<Edge>();
     
 }

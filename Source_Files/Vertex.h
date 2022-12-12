@@ -37,6 +37,7 @@ class Vertex {
             }
             return false;
         }
+        std::string getAirport();
 
         double getLat();
         double getLong();

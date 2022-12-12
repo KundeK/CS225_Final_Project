@@ -17,7 +17,9 @@ Vertex::Vertex(std::string id, std::string name, std::string city, std::string c
 Vertex::Vertex() {
     //Default
 }
-
+std::string Vertex::getAirport()  {
+    return airport_name_;
+}
 double Vertex::getLat() {
     return lat;
 }

@@ -117,11 +117,15 @@ int main(int argc, char** argv) {
     Graph g(data, data2);
     std::cout << "Have gotten past graph construction" << std::endl;
     std::vector<Vertex> v = g.getAdjacent(g.getStartingVertex());
-    std::vector<Edge> cal = g.Dijkstras(g.getStartingVertex(), v.back());
-    for (Edge c : cal) {
-        cout << c.getAirline() << endl;
-    }
-    std::cout << "Have gotten past Dijkstra" << std::endl;
+    Vertex next = g.getAdjacent(v.back()).back();
+    std::vector<Edge> cal = g.Dijkstras(g.getStartingVertex(), next);
+    // int counter = 0;
+    // for (Edge c : cal) {
+    //     counter++;
+    //     std::cout << c.getAirline() << std::endl;
+    // }
+    //std::cout << counter << std::endl;
+    //std::cout << "Have gotten past Dijkstra" << std::endl;
     return 0;
 }
 

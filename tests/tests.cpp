@@ -6,7 +6,7 @@
 #include <cmath>
 #include "../Source_Files/Graph.h"
 
-//Graph Test Cases - Aadarsh
+//TEST SUITE, CONSTRUCT A SMALLER GRAPH AND TEST ALGS
 
 int main (int argc, char** argv) {
     //Test Constructing Graph
@@ -60,6 +60,8 @@ int main (int argc, char** argv) {
     }
     fin.close();
 
+
+
     //For-loop for map data-verification, should be commented out unless testing
     // for(auto it = data.cbegin(); it != data.cend(); it++){
     //     std::cout << it->first << ", " << 
@@ -71,6 +73,8 @@ int main (int argc, char** argv) {
     //                  it->second.second.second.second.second.second.first << ", " << 
     //                  it->second.second.second.second.second.second.second << std::endl; 
     // }
+
+
 
 
     //routes.dat
@@ -111,6 +115,9 @@ int main (int argc, char** argv) {
     }
     fin2.close();
 
+
+
+
     //For-loop for map data-verification, should be commented out unless testing
     // for(auto it = data2.cbegin(); it != data2.cend(); it++){
     //     std::cout << it->first << ", " << 
@@ -122,13 +129,19 @@ int main (int argc, char** argv) {
     // }
 
 
+    //TEST CASES FOR ALGS + GRAPH CONSTRUCTION
+
     Graph g(data, data2);
+
+    int num_passing = 0;
+    int tot = 6;
 
     //POSITIVE TEST CASES: There should be an edge between LAX and ATL
     if (!g.edgeExists("3484", "3682")) {
         std::cout << "TEST FAILED, THERE SHOULD BE AN EDGE FROM LAX TO ATL" << std::endl; //There should be an edge representing the route from LAX to ATL
     } else {
         std::cout << "TEST PASSED!" << std::endl;
+        num_passing++;
         std::cout << std::endl;
     }
 
@@ -136,6 +149,7 @@ int main (int argc, char** argv) {
         std::cout << "TEST FAILED, THERE SHOULD BE AN EDGE FROM LAX TO CMH" << std::endl; //There should be an edge representing the route from LAX to CMH
     } else {
         std::cout << "TEST PASSED!" << std::endl;
+        num_passing++;
         std::cout << std::endl;
     }
 
@@ -144,6 +158,7 @@ int main (int argc, char** argv) {
         std::cout << "TEST FAILED, THERE SHOULD NOT BE AN EDGE FROM LAX TO NON EXISTANT" << std::endl; 
     } else {
         std::cout << "TEST PASSED!" << std::endl;
+        num_passing++;
         std::cout << std::endl;
     }
 
@@ -151,6 +166,7 @@ int main (int argc, char** argv) {
         std::cout << "TEST FAILED, THERE SHOULD NOT BE AN EDGE FROM LAX TO OTJ" << std::endl; 
     } else {
         std::cout << "TEST PASSED!" << std::endl;
+        num_passing++;
         std::cout << std::endl;
     }
 
@@ -161,8 +177,34 @@ int main (int argc, char** argv) {
         std::cout << "TEST FAILED, WRONG PAGE RANK OUTPUT" << std::endl; 
     } else {
         std::cout << "TEST PASSED!" << std::endl;
+        num_passing++;
         std::cout << std::endl;
     }
+
+    //TEST Dijkstra's ALG : Should return the Edge between LAX and AMS as the shortest path from LAX to ATL
+    try {
+        std::vector<Edge> e = g.Dijkstras(g.getVertex("3484"), g.getVertex("3520"));
+
+        if (e.size() == 1) {
+            if (g.getEdge(g.getVertex("3484"), g.getVertex("3520")) != e.at(0)) {
+                std::cout << "TEST FAILED, RETURNED EDGE IS INCORRECT" << std::endl;
+                std::cout << "Start Airport ID Should Be 3484 was: " << e.at(0).getStart().getID() << std::endl;
+                std::cout << "End Airport ID Should Be 3520 was: " << e.at(0).getEnd().getID() << std::endl;
+            } else {
+                std::cout << "TEST PASSED!" << std::endl;
+                num_passing++;
+                std::cout << std::endl;
+            }
+        } else {
+            std::cout << "Dijkstra's vector size is incorrect" << std::endl;
+            std::cout << std::endl;
+        }
+
+        std::cout << num_passing << "/" << tot << " tests passed." << std::endl;
+    } catch (...) {
+        std::cout << num_passing << "/" << tot << " tests passed." << std::endl;
+    }
+    
 
 
 

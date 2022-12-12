@@ -67,7 +67,15 @@ class Graph {
     bool insertEdge(Vertex source, Vertex destination);
 
 
+    /**
+    * Helper for Page Rank to get degree of a node
+    */
     double getDegree(Vertex node);
+
+    /**
+    * Get Vertex from ID of Airport
+    */
+    Vertex getVertex(std::string id);
 
 
 

@@ -169,8 +169,8 @@ Vertex Graph::PageRank() {
        }
    }
  
-   std::cout << "Rank: " << new_rank[maxVertex] << std::endl;
-   std::cout << "Size of map: " << adjacency_list[maxVertex].size() << std::endl;
+//    std::cout << "Rank: " << new_rank[maxVertex] << std::endl;
+//    std::cout << "Size of map: " << adjacency_list[maxVertex].size() << std::endl;
    return maxVertex;
 }
 

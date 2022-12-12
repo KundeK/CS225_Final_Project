@@ -46,6 +46,12 @@ class Graph {
 
 
     /**
+     * Checks if edge exists between two air id's exists.
+     */
+    bool edgeExists(std::string air_id_1, std::string air_id_2) const;
+
+
+    /**
      * Checks if edge exists between two vertices exists.
      */
     bool edgeExists(Vertex source, Vertex destination) const;

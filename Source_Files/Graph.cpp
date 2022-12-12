@@ -76,6 +76,19 @@ bool Graph::insertEdge(Vertex source, Vertex destination) {
     return true;
 }
 
+bool Graph::edgeExists(std::string air_id_1, std::string air_id_2) const {
+    for (auto map : adjacency_list) {
+        if (map.first.getID() == air_id_1) {
+            for (auto map2 : map.second) {
+                if (map2.first.getID() == air_id_2) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
 
 double Graph::getDegree(Vertex node) { //For Krushank's PageRank
     return adjacency_list[node].size();

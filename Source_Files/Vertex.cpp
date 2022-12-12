@@ -34,6 +34,10 @@ std::string Vertex::getAirportName() {
    return airport_name_;
 }
 
+std::string Vertex::getID() const {
+    return airport_id_;
+}
+
 
 long double Vertex::getEdgeWeight(long double lat1, long double long1, long double lat2, long double long2) {
     lat1 = toRadians(lat1);

@@ -15,6 +15,7 @@ int main (int argc, char** argv) {
 
     if (argc != 3) {
         std::cout << "Not enough inputs!" << std::endl;
+        return -1;
     }
 
 
@@ -122,7 +123,43 @@ int main (int argc, char** argv) {
 
 
     Graph g(data, data2);
+
+    //POSITIVE TEST CASES: There should be an edge between LAX and ATL
+    if (!g.edgeExists("3484", "3682")) {
+        std::cout << "TEST FAILED, THERE SHOULD BE AN EDGE FROM LAX TO ATL" << std::endl; //There should be an edge representing the route from LAX to ATL
+    } else {
+        std::cout << "TEST PASSED!" << std::endl;
+        std::cout << std::endl;
+    }
+
+    if (!g.edgeExists("3484", "3759")) {
+        std::cout << "TEST FAILED, THERE SHOULD BE AN EDGE FROM LAX TO CMH" << std::endl; //There should be an edge representing the route from LAX to ATL
+    } else {
+        std::cout << "TEST PASSED!" << std::endl;
+        std::cout << std::endl;
+    }
+
+    //NEGATIVE TEST CASES: There shouldn't be an edge between LAX and Non-existing airport id
+    if (g.edgeExists("3484", "8018")) {
+        std::cout << "TEST FAILED, THERE SHOULD NOT BE AN EDGE FROM LAX TO NON EXISTANT" << std::endl; 
+    } else {
+        std::cout << "TEST PASSED!" << std::endl;
+        std::cout << std::endl;
+    }
+
+    if (g.edgeExists("3484", "13122")) { //Should not be an edge in truncated dataset from LAX to ID 13112, an airport in Namibia
+        std::cout << "TEST FAILED, THERE SHOULD NOT BE AN EDGE FROM LAX TO OTJ" << std::endl; 
+    } else {
+        std::cout << "TEST PASSED!" << std::endl;
+        std::cout << std::endl;
+    }
+
+
+
+    //TEST PAGE RANK ALG
     std::cout << g.PageRank().getAirportName() << std::endl;
+
+
     return 0;
 
 

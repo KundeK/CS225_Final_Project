@@ -134,7 +134,7 @@ int main (int argc, char** argv) {
     Graph g(data, data2);
 
     int num_passing = 0;
-    int tot = 6;
+    int tot = 7;
 
     //POSITIVE TEST CASES: There should be an edge between LAX and ATL
     if (!g.edgeExists("3484", "3682")) {
@@ -181,7 +181,24 @@ int main (int argc, char** argv) {
         std::cout << std::endl;
     }
 
-    //TEST Dijkstra's ALG : Should return the Edge between LAX and AMS as the shortest path from LAX to ATL
+    //TEST EDGE CASE, SAME AIRPORT
+
+    try {
+        std::vector<Edge> e = g.Dijkstras(g.getVertex("3484"), g.getVertex("3484"));
+        if (!e.empty()) {
+            std::cout << "TEST FAILED, RETURNED VECTOR IS NOT EMPTY" << std::endl;
+        } else {
+            std::cout << "TEST PASSED!" << std::endl;
+            num_passing++;
+            std::cout << std::endl;
+        }
+    } catch (...) {
+        std::cout << "UNKOWN ERROR" << std::endl;
+    }
+    
+    //TEST Dijkstra's ALG : Should return the Edge between LAX and AMS as the shortest path from LAX to AMS
+
+
     try {
         std::vector<Edge> e = g.Dijkstras(g.getVertex("3484"), g.getVertex("3520"));
 

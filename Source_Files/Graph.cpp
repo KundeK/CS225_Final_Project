@@ -224,7 +224,7 @@ std::vector<Edge> Graph::Dijkstras(Vertex source, Vertex destination) {
     }
     std::vector<Vertex> adj = getAdjacent(source);
     for(unsigned int i = 0; i < adj.size(); i++) {
-        if (source == destination) {
+        if (adj[i] == destination) {
             std::vector<Edge> value;
             Edge l = getEdge(source,destination);
             value.push_back(l);

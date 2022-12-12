@@ -48,7 +48,7 @@ To run tests:
 
     cd into Source_Files
     run ' clang++ -std=c++20 Edge.cpp Vertex.cpp Graph.cpp ../tests/tests.cpp -Wall -Wextra -pedantic -o exec '
-    run ' ./exec ../entry/airports_test.dat ../routes_test.dat '
+    run ' ./exec ../entry/airports_test.dat ../entry/routes_test.dat '
 
 
 

@@ -9,6 +9,8 @@ entry: Contains main.cpp and the different .dat files that the project uses.
     routes_test.dat - Truncated dataset used for testing
 
     Makefile - Contains make main target that allows us to compile and run main.cpp automatically
+    
+    main.cpp - Entry point of program which creates a graph and runs algs on full size dataset
 
 
 Source_Files: Contains all .cpp and .h files used by the project
@@ -23,7 +25,7 @@ Source_Files: Contains all .cpp and .h files used by the project
 
     Graph.cpp
     Graph.h
-    ^ Representation of all airports and routes between them
+    ^ Representation of all airports and routes between them. Contains code for the algorithms.
 
 tests: Contains test suite using truncated datasets to test our code
 

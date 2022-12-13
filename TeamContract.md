@@ -61,7 +61,7 @@ We will be implementing Dijkstra's algorithm in order to find the shortest/optim
 
 We will also be implementing the PageRank algorithm in order to determine the busiest airport based on how many incoming/outbound flights there are as well as how many airports are connected to the target airport. The algorithm would not need any inputs, however the output would be a map where the key is the airport and the value is a vector containing the airports that are connected to the target airport. A target goal for the Big O efficiency for the PageRank algorithm would be O(E+V) where E is the number of edges/routes between airports and V is the number of airports.
 
-For the purposes of our final project, the two graph data algorithms we will implement are Dijkstra’s algorithm and the PageRank algorithm. Dijkstra’s algorithm will be used for finding the shortest number of stops between airports while the PageRank algorithm will be used to determine the most popular (most visited) airports. We will be implementing the BFS traversal for our graph traversal.
+For the purposes of our final project, the two graph data algorithms we will implement are Dijkstra’s algorithm and the PageRank algorithm. Dijkstra’s algorithm will be used for finding the shortest number of stops between airports while the PageRank algorithm will be used to determine the most popular (most visited) airports. We will be implementing the DFS traversal for our graph traversal.
 
 ## Timeline
 

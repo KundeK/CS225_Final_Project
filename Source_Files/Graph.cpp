@@ -4,7 +4,7 @@ Graph::Graph() {
     //Default
 }
 
-//Runtime depends on size of data: might be horrendous
+//Graph Constructor from data parsing pipeline
 Graph::Graph(std::multimap<std::string, std::pair<std::string, std::pair<std::string, std::pair<std::string,
                   std::pair<std::string, std::pair<std::string, std::pair<std::string, std::string>>>>>>> airport_data, std::multimap<std::string, std::pair<std::string, std::pair<std::string, std::pair<std::string,
                   std::pair<std::string, std::string>>>>> route_data) {
@@ -51,20 +51,18 @@ Graph::Graph(std::multimap<std::string, std::pair<std::string, std::pair<std::st
                         } catch (...) {
                             //std::cout << "Start and/or end Airports don't exist in graph" << std::endl;
                         }
-                        
-                        
                     }
-
-
-
 }
 
 
-Vertex Graph::getStartingVertex() const { //Just get whatever vertex is at the top of map
+Vertex Graph::getStartingVertex() const { //Get whichever vertex is at the top of map
     return adjacency_list.begin()->first;
 }
 
 
+//Checks to see if edge exists between two airports
+// Parameters: 2 strings for 2 airports
+// Output: Bool, True if edge exists, False otherwise
 bool Graph::edgeExists(std::string air_id_1, std::string air_id_2) const {
     for (auto map : adjacency_list) {
         if (map.first.getID() == air_id_1) {
@@ -78,13 +76,18 @@ bool Graph::edgeExists(std::string air_id_1, std::string air_id_2) const {
     return false;
 }
 
-
-double Graph::getDegree(Vertex node) { //For Krushank's PageRank
+// Gets Degree of vertex
+// Parameter: Takes in Vertex
+// Returns double which is degree of vertex
+double Graph::getDegree(Vertex node) { 
     return adjacency_list[node].size();
 }
 
 
-//Finished, needs to be tested
+//PageRank Algorithm
+//Takes in no parameters
+//Outputs a Vertex object which is the airport that is 
+// the most connected Vertex in graph
 Vertex Graph::PageRank() {
   
    std::map<Vertex, double> old_rank;
@@ -92,8 +95,6 @@ Vertex Graph::PageRank() {
    std::vector<Vertex> vertices;
    std::vector<Vertex> no_outlinks;
    double d = 0.85;
- 
-   // N <- number of nodes in G (number of airports)
  
    //get all vertices
    for (std::map<Vertex, std::map<Vertex, Edge>>::iterator iter = adjacency_list.begin(); iter != adjacency_list.end(); ++iter) {
@@ -146,7 +147,7 @@ Vertex Graph::PageRank() {
    }
  
  
- 
+   //Finding most connected Vertex in graph, find max rank within map
    Vertex maxVertex;
    double maxNum = 0.0;
    for (std::map<Vertex, double>::iterator it = new_rank.begin(); it != new_rank.end(); ++it) {
@@ -158,7 +159,8 @@ Vertex Graph::PageRank() {
    return maxVertex;
 }
 
-
+// Parameters: Takes in 2 Vertices
+// Returns Edge object between two vertices, if exists
 Edge Graph::getEdge(Vertex start, Vertex end) const {
     Edge e; //Nothing found
     std::map<Vertex, Edge> map = adjacency_list.at(start);
@@ -171,6 +173,8 @@ Edge Graph::getEdge(Vertex start, Vertex end) const {
     return e; //Nothing found, empty edge
 }
 
+//Parameter: Takes in a Vertex object
+//Returns a vector of Vertices adjacent to passed in Vertex
 vector<Vertex> Graph::getAdjacent(Vertex source) const {
     std::vector<Vertex> v;
     std::map<Vertex, Edge> map = adjacency_list.at(source);
@@ -180,6 +184,8 @@ vector<Vertex> Graph::getAdjacent(Vertex source) const {
     return v;
 }
 
+//Parameter: Vertex object
+// Returns true if vertex passed in exists, false otherwise
 bool Graph::vertexExists (Vertex v) const {
     if (adjacency_list.find(v) != adjacency_list.end()) {
         return true; //Found
@@ -187,6 +193,9 @@ bool Graph::vertexExists (Vertex v) const {
     return false; //Doesn't exist
 }
 
+// Overriden function: Checks to see if edge exists between two airports
+// Parameters: 2 Vertices for 2 airports
+// Output: Bool, True if edge exists, False otherwise
 bool Graph::edgeExists(Vertex source, Vertex destination) const {
     if (adjacency_list.find(source) == adjacency_list.end()) {
         return false; //Vertex not in map
@@ -202,6 +211,11 @@ bool Graph::edgeExists(Vertex source, Vertex destination) const {
     return false; //Doesn't exist
 }
 
+
+//Dijkstras Algorithm
+//Takes in 2 Vertex objects
+//Outputs a vector of Edge objects which is the path that is 
+// the shortest between the passed in Vertices
 std::vector<Edge> Graph::Dijkstras(Vertex source, Vertex destination) {
     //Follow class psuedo code, handle edge cases
     if(source == destination) {
@@ -255,13 +269,13 @@ std::vector<Edge> Graph::Dijkstras(Vertex source, Vertex destination) {
     //     std::cout << c.getStart(). << "  " << c.getEnd().a << endl;
     // }
     return to_return;
-    //return std::vector<Edge>();
-    
 }
 
 
-
-Vertex Graph::getVertex(std::string id) { //Get vertex from airport id
+//Getter for vertex from airport id
+//Parameter: Takes in string id
+// Returns Vertex that matches id
+Vertex Graph::getVertex(std::string id) { 
     Vertex v;
     for (auto map : adjacency_list) {
         if (map.first.getID() == id) {

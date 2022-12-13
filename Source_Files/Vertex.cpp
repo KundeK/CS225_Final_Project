@@ -13,33 +13,47 @@ Vertex::Vertex(std::string id, std::string name, std::string city, std::string c
     lon = std::stod(longi);
 }
 
+//Default Constructor
 Vertex::Vertex() {
     //Default
 }
 
-double Vertex::getLat() { //Getters
+//Getter for latitude coordinate
+//Returns latitude value
+double Vertex::getLat() { 
     return lat;
 }
-double Vertex::getLong() { //Getters
+
+//Getter for longitude coordinate
+//Returns longitude value
+double Vertex::getLong() { 
     return lon;
 }
 
+// Helper method for calculating distance
+//Parameter: Takes in long double value in degrees
+// Returns long double value in terms of radians
 long double Vertex::toRadians(long double degree) { //Helper to calc distance
     long double one_deg = (M_PI) / 180;
     return (one_deg * degree);
 }
 
+// Getter for Airport Name
+// Returns string of airport name
 std::string Vertex::getAirportName() { //Getters
    return airport_name_;
 }
 
-std::string Vertex::getID() const { //Getters
+// Getter for Airport ID
+// Returns string of Airport ID
+std::string Vertex::getID() const { 
     return airport_id_;
 }
 
 
 //Calculate distance method
-
+// Takes in 4 long doubles, two sets of latitude, longitude coordinates
+// Returns 1 long double, representing the Edge weight
 long double Vertex::getEdgeWeight(long double lat1, long double long1, long double lat2, long double long2) {
     lat1 = toRadians(lat1);
     long1 = toRadians(long1);

@@ -11,9 +11,6 @@
 int main(int argc, char** argv) {
     //DO DATA PROCESSING HERE, FEED IN PATH TO DAT FILE THROUGH TERMINAL
 
-
-    /* AADARSH - ADDED COMMAND LINE ARGUMENT VARIABLE INPUT */
-
     if (argc != 3) {
         std::cout << "Not enough inputs!" << std::endl;
         return -1;

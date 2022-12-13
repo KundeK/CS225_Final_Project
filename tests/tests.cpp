@@ -11,8 +11,6 @@
 int main (int argc, char** argv) {
     //Test Constructing Graph
 
-    /* AADARSH - ADDED COMMAND LINE ARGUMENT VARIABLE INPUT */
-
     if (argc != 3) {
         std::cout << "Not enough inputs!" << std::endl;
         return -1;
@@ -192,7 +190,7 @@ int main (int argc, char** argv) {
             std::cout << std::endl;
         }
     } catch (...) {
-        std::cout << "UNKOWN ERROR" << std::endl;
+        std::cout << "UNKNOWN ERROR" << std::endl;
     }
     
     //TEST Dijkstra's ALG : Should return the Edge between LAX and AMS as the shortest path from LAX to AMS
@@ -230,19 +228,3 @@ int main (int argc, char** argv) {
 
 
 }
-
-
-
-// TEST_CASE("Construct Graph Complex", "[weight=4][part=Graph]") {
-    
-// }
-
-// TEST_CASE("Construct Graph Edge Case 1", "[weight=4][part=Graph]") {
-    
-// }
-
-// TEST_CASE("Construct Graph Edge Case 2", "[weight=4][part=Graph]") {
-    
-// }
-
-//ADD UNIT TEST CASES FOR OTHER PARTS OF CODE

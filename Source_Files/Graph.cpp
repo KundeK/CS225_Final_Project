@@ -54,12 +54,6 @@ Graph::Graph(std::multimap<std::string, std::pair<std::string, std::pair<std::st
                     }
 }
 
-
-Vertex Graph::getStartingVertex() const { //Get whichever vertex is at the top of map
-    return adjacency_list.begin()->first;
-}
-
-
 //Checks to see if edge exists between two airports
 // Parameters: 2 strings for 2 airports
 // Output: Bool, True if edge exists, False otherwise

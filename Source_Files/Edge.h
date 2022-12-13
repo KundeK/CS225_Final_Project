@@ -9,8 +9,6 @@ class Edge {
         
         //Paramaterized Constructors
         Edge(Vertex start, Vertex end);
-        Edge(Vertex start, Vertex end, std::string airline, unsigned long distance);
-        Edge(Vertex start, Vertex end, std::string airline);
 
         //Getters
         Vertex getStart();

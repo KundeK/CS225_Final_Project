@@ -58,7 +58,7 @@ To run tests:
     
 If testing with custom dataset using command line arguments:
     
-    Make sure the first command line argument is the airports dataset and the seccond command line argument is the routes dataset.
+    Make sure the first command line argument is the airports dataset and the second command line argument is the routes dataset.
 
 
 

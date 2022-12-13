@@ -39,7 +39,7 @@ To run main:
     then run ' make main ' 
     then run ' ./main ../entry/airports.dat ../entry/routes.dat ' 
    
-    Alternatively:
+    Alternatively in the case make does not work:
         cd into Source_Files
         run ' clang++ -std=c++20 Edge.cpp Vertex.cpp Graph.cpp ../entry/main.cpp -Wall -Wextra -pedantic -o exec '
         run ' ./exec ../entry/airports.dat ../entry/routes.dat '

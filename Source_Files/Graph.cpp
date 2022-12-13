@@ -278,3 +278,24 @@ Vertex Graph::getVertex(std::string id) {
     }
     return v;
 }
+
+void Graph::DFS(Vertex start, std::vector<Vertex>& visited) { //DFS Traversal of Graph
+    visited.push_back(start);
+ 
+    // Do for all the vertices adjacent
+    for (auto i = adjacency_list[start].begin(); i != adjacency_list[start].end(); ++i) {
+        if (std::find(visited.begin(), visited.end(), i->first) == visited.end()) {
+            DFS(i->first, visited);
+        }
+    }  
+
+}
+
+std::map<Vertex, std::map<Vertex, Edge>> Graph::getAdjacencyList() {
+    return adjacency_list;
+}
+
+
+Vertex Graph::getStartingVertex() const { //Get whichever vertex is at the top of map
+    return adjacency_list.begin()->first;
+}

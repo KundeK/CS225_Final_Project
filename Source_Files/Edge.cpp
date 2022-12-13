@@ -19,9 +19,7 @@ Vertex Edge::getStart() {
 Vertex Edge::getEnd() {
     return end_airport_;
 }
-std::string Edge::getAirline() {
-    return airline_;
-}
+
 unsigned long Edge::getDistance() {
     return distance_;
 }

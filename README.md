@@ -55,6 +55,10 @@ To run tests:
     cd into Source_Files
     run ' clang++ -std=c++20 Edge.cpp Vertex.cpp Graph.cpp ../tests/tests.cpp -Wall -Wextra -pedantic -o exec '
     run ' ./exec ../entry/airports_test.dat ../entry/routes_test.dat '
+    
+If testing with custom dataset using command line arguments:
+    
+    Make sure the first command line argument is the airports dataset and the seccond command line argument is the routes dataset.
 
 
 

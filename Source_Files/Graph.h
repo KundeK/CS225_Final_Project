@@ -26,11 +26,6 @@ class Graph {
      * Gets all adjacent vertices to the parameter vertex.
      */
     vector<Vertex> getAdjacent(Vertex source) const;
-
-    /**
-     * Returns one random vertex in the graph. 
-     */
-    Vertex getStartingVertex() const;
     
 
     /**

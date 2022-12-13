@@ -131,8 +131,6 @@ int main (int argc, char** argv) {
     int tot = 8;
 
 
-    
-
 
     
     //POSITIVE TEST CASES: There should be an edge between LAX and ATL

@@ -7,6 +7,7 @@
 #include <queue>
 #include <utility>
 #include <set>
+#include <algorithm>
 using namespace std;
 
 class Graph {
@@ -61,9 +62,18 @@ class Graph {
     */
     Vertex getVertex(std::string id);
 
+    /**
+     * Returns one random vertex in the graph. 
+     */
+    Vertex getStartingVertex() const;
+
     Vertex PageRank(); //PageRank Algoirhtm - returns busiest airport
     
     std::vector<Edge> Dijkstras(Vertex source, Vertex destination); //Dijkstra's Algorithm shortest path
+
+    void DFS(Vertex start, std::vector<Vertex>& visited); //DFS Traversal of Graph
+
+    std::map<Vertex, std::map<Vertex, Edge>> getAdjacencyList();
 
     private:
         std::map<Vertex, std::map<Vertex, Edge>> adjacency_list; //adajacency list representation

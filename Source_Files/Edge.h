@@ -13,7 +13,6 @@ class Edge {
         //Getters
         Vertex getStart();
         Vertex getEnd();
-        std::string getAirline();
         unsigned long getDistance();
         void setDistance(long double dist);
         void setLabel(std::string a);

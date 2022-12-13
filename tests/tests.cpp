@@ -127,10 +127,12 @@ int main (int argc, char** argv) {
     //TEST CASES FOR ALGS + GRAPH CONSTRUCTION
 
     Graph g(data, data2);
-
     int num_passing = 0;
-    int tot = 7;
+    int tot = 8;
 
+
+
+    
     //POSITIVE TEST CASES: There should be an edge between LAX and ATL
     if (!g.edgeExists("3484", "3682")) {
         std::cout << "TEST FAILED, THERE SHOULD BE AN EDGE FROM LAX TO ATL" << std::endl; //There should be an edge representing the route from LAX to ATL
@@ -213,14 +215,27 @@ int main (int argc, char** argv) {
             std::cout << std::endl;
         }
 
-        std::cout << num_passing << "/" << tot << " tests passed." << std::endl;
+        
     } catch (...) {
-        std::cout << num_passing << "/" << tot << " tests passed." << std::endl;
+        std::cout << "Unknown Error" << std::endl;
     }
     
     /* Dijkstra's has some edge case issues but is mostly functional */
     
 
+    //Run Depth First Search Traversal to Ensure no Issues
+    std::vector<Vertex> visit;
+    g.DFS(g.getStartingVertex(), visit);
+    if (visit.size() != 19) { //19 is the amount of vertices in this connected component of the graph
+        std::cout << "DFS TRAVERSAL TEST FAILED, WRONG SIZE! SHOULD BE " << g.getAdjacencyList().size() << " WAS " << visit.size() << std::endl;
+        std::cout << std::endl;
+    } else {
+        std::cout << "TEST PASSED!" << std::endl;
+        num_passing++;
+        std::cout << std::endl;
+    }
+
+    std::cout << num_passing << "/" << tot << " tests passed." << std::endl;
 
 
     return 0;
